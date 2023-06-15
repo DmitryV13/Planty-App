@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.With;
 
+import java.time.Duration;
+import java.time.Period;
+
 @Entity
 @Getter
 @With
@@ -18,6 +21,6 @@ public class Watering {
     private Long id;
     
     private String amountOfWater;
-    private String duration;
-    private String period;
+    private Duration duration;
+    private Period period;
 }

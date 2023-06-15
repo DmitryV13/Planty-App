@@ -26,7 +26,7 @@ public class Plant {
     @ManyToOne(cascade = CascadeType.ALL)
     private Conditions conditions;
     
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name="utilizer_id")
     private Utilizer utilizer;
 }
