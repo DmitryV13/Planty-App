@@ -26,9 +26,8 @@ public class Utilizer {
     @OneToOne(cascade = CascadeType.ALL)
     private Credentials credentials;
     
-    
     //двусторонняя связь для доступа растений
     //из юзера при помощи репозитория
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "utilizer")
-    private List<Plant> plants;
+    private List<MyPlantSample> myPlantSamples;
 }

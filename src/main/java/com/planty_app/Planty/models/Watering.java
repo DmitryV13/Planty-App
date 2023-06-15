@@ -20,7 +20,7 @@ public class Watering {
     @Column(name = "id", nullable = false)
     private Long id;
     
-    private String amountOfWater;
+    private double amountOfWater;
     private Duration duration;
     private Period period;
 }
