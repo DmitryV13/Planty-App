@@ -1,6 +1,6 @@
 package com.planty_app.Planty.controllers;
 
-public class Example {
+public class UtilizerController {
     //при необходимости переименовывайте классы
     //я их создал для сохранения папок, как структуры
     //в файле application.yml я указал порт 8081, потому
