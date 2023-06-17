@@ -1,6 +1,6 @@
-package com.planty_app.Planty.services;
+package com.planty_app.Planty.initializer;
 
-public class Example {
+public class DataInitialiser {
     //при необходимости переименовывайте классы
     //я их создал для сохранения папок, как структуры
     //в файле application.yml я указал порт 8081, потому
