@@ -8,4 +8,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/demoplants
     username: admin
     password: password
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
 
