@@ -18,5 +18,4 @@ public class Credentials {
     private Long id;
     
     private String password;
-    private String login;
 }

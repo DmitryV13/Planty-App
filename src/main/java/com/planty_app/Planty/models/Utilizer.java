@@ -21,6 +21,7 @@ public class Utilizer {
     
     private String name;
     private String surname;
+    private String login;
     private Role role;
     
     @OneToOne(cascade = CascadeType.ALL)
