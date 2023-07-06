@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("")
 public class UtilizerController {
     private final UtilizerService utilizerService;
-    
-    @Autowired
     public UtilizerController(UtilizerService utilizerService) {
         this.utilizerService = utilizerService;
     }
@@ -30,7 +28,7 @@ public class UtilizerController {
                                  @RequestParam String login,
                                  @RequestParam String newpassword
     ){
-        utilizerService.createUtilizer(name,surname,login,newpassword);
+        utilizerService.createUtilizer(name, surname, login, newpassword);
         return "redirect:/";
     }
 }

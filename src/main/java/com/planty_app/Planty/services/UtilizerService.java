@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtilizerService {
     private final UtilizerRepository utilizerRepository;
-    
-    @Autowired
     UtilizerService(UtilizerRepository utilizerRepository) {
         this.utilizerRepository = utilizerRepository;
     }
