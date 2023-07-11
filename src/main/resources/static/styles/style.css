@@ -191,12 +191,6 @@ header {
     color: rgb(62 206 147);
 }
 
-.header__list-item:last-child a {
-    font-size: 18px;
-    color: rgb(62 206 147);
-}
-
-
 .header__list-item::before {
     content: '';
     position: absolute;
@@ -419,24 +413,11 @@ main {
     color:rgb(62 206 147);
 }
 
-.isPresent{
-    display: flex;
-    visibility: visible;
-    align-items: center;
-    margin-top: 15px;
-}
-
-.sign-in-form-error{
-    /*display: none;*/
-    /*visibility: hidden;*/
-    display: flex;
-    visibility: visible;
-    align-items: center;
+.sign-in-error{
     margin-top: 15px;
 }
 
 .error-message{
-    padding-left: 5px;
     color: #CD2727;
 }
 
@@ -546,7 +527,7 @@ main {
     padding: 10px 30px;
     background: rgb(62 206 147);
     border-radius: 20px;
-    transition: all 0.8s ease 0s;
+    transition: all 0.6s ease 0s;
 }
 
 .form-button:hover {

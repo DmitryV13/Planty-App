@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/addTools.css">
+    <title>Planty</title>
+</head>
+<body>
+<div class="wrapper">
+    <!--header-->
+    <header th:insert="~{pages/components/header::header}">
+    </header>
+    <!--header-->
+
+    <!--main-->
+    <main>
+        <div class="container">
+            <div class="main__container">
+                <form method="post" th:object="${newPlant}" th:action="@{/createNewPlant}" class="tools-form-body">
+                    <div class="tools-form-title">Add new plant</div>
+                    <div class="tools-plant">
+                        <div class="tools-item">
+                            <label for="plantName" class="tools-label">Plant's name:</label>
+                            <input th:field="*{name}" type="text" id="plantName" name="plantName" class="tools-input"
+                                   tabindex="1">
+                        </div>
+                    </div>
+                    <div class="tools-history">
+                        <div class="tools-item">
+                            <label for="plantFamily" class="tools-label">Plant's family:</label>
+                            <input th:field="*{history.family}" type="text" id="plantFamily" name="plantFamily"
+                                   class="tools-input" tabindex="1">
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantSpecies" class="tools-label">Plant's species:</label>
+                            <input th:field="*{history.species}" type="text" id="plantSpecies" name="plantSpecies"
+                                   class="tools-input" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="tools-description">
+                        <div class="tools-item">
+                            <label for="plantExternal" class="tools-label">Plant's external:</label>
+                            <div tabindex="0" class="textarea-content">
+                                <textarea th:field="*{description.external}" id="plantExternal" name="plantExternal"
+                                          class="tools-input"
+                                          placeholder="Enter info about plant's external" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantFragmentation" class="tools-label">Plant's fragmentation:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{description.fragmentation}" id="plantFragmentation"
+                                          name="plantFragmentation" class="tools-input"
+                                          placeholder="Enter info about plant's fragmentation" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantProtectionStatus" class="tools-label">Protection status</label>
+                            <select th:field="*{description.protectionStatus}" id="plantProtectionStatus">
+                                <option th:each="status : ${T(com.planty_app.Planty.models.ProtectionStatus).values()}"
+                                        th:value="${status}"
+                                        th:text="${status}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tools-conditions">
+                        <div class="tools-item">
+                            <label for="plantTemperature" class="tools-label">Plant's temperature:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{conditions.temperature}" id="plantTemperature"
+                                          name="plantTemperature" class="tools-input"
+                                          placeholder="Enter info about favorable temperature" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantHumidity" class="tools-label">Plant's humidity:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{conditions.humidity}" id="plantHumidity" name="plantHumidity"
+                                          class="tools-input"
+                                          placeholder="Enter info about favorable humidity" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantLighting" class="tools-label">Plant's lighting:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{conditions.lighting}" id="plantLighting" name="plantLighting"
+                                          class="tools-input"
+                                          placeholder="Enter info about favorable lighting" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantSoil" class="tools-label">Plant's soil:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{conditions.soil}" id="plantSoil" name="plantSoil"
+                                          class="tools-input"
+                                          placeholder="Enter info about favorable soil" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantFertilizer" class="tools-label">Plant's fertilizer:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{conditions.fertilizer}" id="plantFertilizer"
+                                          name="plantFertilizer" class="tools-input"
+                                          placeholder="Enter info about plant's fertilizer" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantTransplantation" class="tools-label">Plant's transplantation:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{conditions.transplantation}" id="plantTransplantation"
+                                          name="plantTransplantation" class="tools-input"
+                                          placeholder="Enter info about plant's transplantation"
+                                          tabindex="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantThreats" class="tools-label">Plant's threats:</label>
+                            <div class="textarea-content">
+                                <textarea th:field="*{conditions.threats}" id="plantThreats" name="plantThreats"
+                                          class="tools-input"
+                                          placeholder="Enter info about plant's threats" tabindex="1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tools-watering">
+                        <div class="tools-item">
+                            <label for="plantWateringPeriods" class="tools-label">Plant's watering periods:</label>
+                            <input th:field="*{conditions.watering.amountOfWaterKey}" type="text"
+                                   id="plantWateringPeriods" name="plantWateringPeriods" class="tools-input"
+                                   placeholder="Enter several numbers separated by commas" tabindex="1">
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantWateringAmount" class="tools-label">Plant's watering amount:</label>
+                            <input th:field="*{conditions.watering.amountOfWaterValue}" type="text"
+                                   id="plantWateringAmount" name="plantWateringAmount" class="tools-input"
+                                   placeholder="Enter several numbers separated by commas" tabindex="1">
+                        </div>
+                        <div class="tools-item">
+                            <label for="plantPeriod" class="tools-label">Period:</label>
+                            <input th:name="plantPeriod" type="number" id="plantPeriod" placeholder="Enter a number"
+                                   class="tools-input" tabindex="1">
+                        </div>
+                    </div>
+                    <button type="submit" class="tools-button">Add</button>
+                    <div class="viewAll-link">
+                        <a th:href="@{/viewAllPlants}" class="viewAll">View all plants</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <!--main-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--footer-->
+</div>
+<script src="../../static/scrypts/textarea-scrollbar.js"></script>
+</body>
+</html>

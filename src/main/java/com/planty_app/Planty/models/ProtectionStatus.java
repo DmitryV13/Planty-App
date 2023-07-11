@@ -1,13 +1,16 @@
 package com.planty_app.Planty.models;
 
+import lombok.Getter;
+
+@Getter
 public enum ProtectionStatus {
-    DISSAPEARED("Исчезнувшие"),
-    THREATENED("Под угрозой исчезновения"),
-    RARE("Редкие"),
-    USUAL("Обычные");
+    DISSAPEARED("DISSAPEARED"),
+    THREATENED("THREATENED"),
+    RARE("RARE"),
+    USUAL("USUAL");
     
     private final String status;
-    ProtectionStatus(String status){
+    ProtectionStatus (String status){
         this.status=status;
     }
 }

@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="1300">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <!--    <link>//icon-->
     <link type="text/css" rel="stylesheet" href="../static/styles/style.css">
     <title>Planty</title>
@@ -14,33 +17,7 @@
 <div class="wrapper">
     <!--header-->
     <div id="lock"></div>
-    <header>
-        <div class="container">
-            <div class="header__container">
-                <div class="header__logo">
-                    Planty
-                </div>
-                <div class="menu">
-                    <div class="menu__icon">
-                        <span></span>
-                    </div>
-                    <nav class="header__menu">
-                        <ul class="header__list">
-                            <li class="header__list-item">
-                                <a href="#sign_in" class="popup-link">HOME</a></li>
-                            <li class="header__list-item">
-                                <a href="#sign_in" class="popup-link">MY GARDEN</a></li>
-                            <li class="header__list-item">
-                                <a href="">ABOUT US</a></li>
-                            <li class="header__list-item">
-                                <a href="#sign_in" class="popup-link">SIGN IN</a></li>
-                            <li class="header__list-item">
-                                <a href="" class="">(0 6 9) 5 3 8 3 6 3</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
+    <header th:insert="~{pages/components/header::header}">
     </header>
     <!--/header-->
 
@@ -57,7 +34,7 @@
                         tools to monitor the health and beauty of your green friends.
                     </p>
                     <div class="main__button">
-                        <a href="#sign_in" class="popup-link">DISCOVER IT</a>
+                        <a th:href="@{/login}" class="popup-link">DISCOVER IT</a>
                     </div>
                 </div>
                 <div class="main__image">
@@ -66,82 +43,13 @@
             </div>
         </div>
     </main>
-    <div id="sign_in" class="sign-in popup">
-        <form action="#" th:action="@{/login}" method="post" class="sign-in__body popup__body ">
-            <div class="sign-in__content popup__content">
-                <div class="sign-in__title">Sign in</div>
-                <div class="sign-in-form-item">
-                    <img src="../static/icons/mail.svg" class="form-icon">
-                    <label for="username" class="form-label placeholder-username">Username</label>
-                    <input id="username" name="username" type="text" class="form-input">
-                </div>
-                <div class="sign-in-form-item">
-                    <img src="../static/icons/lock.svg" class="form-icon">
-                    <label for="password" class="form-label placeholder-password">Password</label>
-                    <input id="password" name="password" type="password" class="form-input">
-                </div>
-                <div class="sign-in__form-button">
-                    <input type="submit" class="form-button" value="Sign in">
-                </div>
-                <div class="sign-in__form-link">
-                    <a href="#register" class="form-link popup-link">Create an account</a>
-                </div>
-                <div class="sign-in-form-error" th:class="${errorClass}">
-                    <img src="../static/icons/error.png">
-                    <div class="error-message" th:text="${errorMessage}"></div>
-                </div><!-- error-->
-            </div>
-        </form>
-    </div>
-
-    <div id="register" class="registration popup">
-        <form action="#" th:action="@{/addUser}" method="post" class="registration__body popup__body ">
-            <div class="registration__content popup__content">
-                <div class="registration__title">Registration</div>
-                <div class="registration-form-item">
-                    <img src="../static/icons/name.svg" class="form-icon">
-                    <label for="name" class="form-label placeholder-name">Name</label>
-                    <input id="name" name="name" type="text" class="form-input">
-                </div>
-                <div class="registration-form-item">
-                    <img src="../static/icons/surname.svg" class="form-icon">
-                    <label for="surname" class="form-label placeholder-surname">Surname</label>
-                    <input id="surname" name="surname" type="text" class="form-input">
-                </div>
-                <div class="registration-form-item">
-                    <img src="../static/icons/mail.svg" class="form-icon">
-                    <label for="fullusername" class="form-label placeholder-fullusername">Username</label>
-                    <input id="fullusername" name="login" type="text" class="form-input">
-                </div>
-                <div class="registration-form-item">
-                    <img src="../static/icons/lock.svg" class="form-icon">
-                    <label for="newpassword" class="form-label placeholder-newpassword">Password</label>
-                    <input id="newpassword" name="newpassword" type="password" class="form-input">
-                </div>
-                <div class="registration__form-button">
-                    <input type="submit" class="form-button" value="Create">
-                </div>
-                <div class="registration__form-link">
-                    <a href="#sign_in" class="form-link popup-link">Back</a>
-                </div>
-                <div class="registration-form-error"></div><!-- error-->
-            </div>
-        </form>
-    </div>
     <!--/body-->
 
     <!--footer-->
-    <footer>
-        <div class="container">
-            <div class="footer__container">
-                <p class="footer__text">© 2023 All rights reserved</p>
-            </div>
-        </div>
+    <footer th:insert="~{pages/components/footer::footer}">
     </footer>
     <!--/footer-->
 </div>
-
-<script src="../static/scrypts/sign-in.js"></script>
 </body>
 
 </html>

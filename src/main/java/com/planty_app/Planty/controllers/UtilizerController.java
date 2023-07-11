@@ -13,21 +13,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("")
 public class UtilizerController {
     private final UtilizerService utilizerService;
+    
+    @Autowired
     public UtilizerController(UtilizerService utilizerService) {
         this.utilizerService = utilizerService;
     }
     
-    @GetMapping("")
-    public String mainPage(Model model){
+    @GetMapping("/")
+    public String mainPage() {
         return "index";
     }
+    
+    @RequestMapping("/login")
+    public String login() {
+        return "pages/login";
+    }
+    
+    @GetMapping("/aboutUs")
+    public String companyPage() {
+        return "pages/aboutUs";
+    }
+    
+    @GetMapping("/register")
+    public String registration() {
+        return "pages/registration";
+    }
+    
     @PostMapping("/addUser")
     public String createUtilizer(Model model,
-                                 @RequestParam String name,
-                                 @RequestParam String surname,
-                                 @RequestParam String login,
-                                 @RequestParam String newpassword
-    ){
+                                 @RequestParam("name") String name,
+                                 @RequestParam("surname") String surname,
+                                 @RequestParam("login") String login,
+                                 @RequestParam("newpassword") String newpassword
+    ) {
         utilizerService.createUtilizer(name, surname, login, newpassword);
         return "redirect:/";
     }

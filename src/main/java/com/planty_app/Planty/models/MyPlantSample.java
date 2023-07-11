@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.With;
 
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.List;
 
 @Entity
@@ -27,24 +28,24 @@ public class MyPlantSample {
     @JoinColumn(name="utilizer_id")
     private Utilizer utilizer;
     
-    private long plantAge;   //is stored in days
+    private Period plantAge;   //is stored in days
     private LocalDateTime startOfWatering;
     private LocalDateTime endOfWatering;
     private LocalDateTime endOfRestBetweenWaterings;
-    
-    void resolveTheDateOfEndOfWatering(LocalDateTime startOfWatering, Plant plant){
-        endOfWatering=startOfWatering.plusHours(plant
-                .getConditions()
-                .getWatering()
-                .getDuration()
-                .toHours());
-    }
-    
-    void resolveTheDateOfRestBetweenWaterings(LocalDateTime endOfWatering, Plant plant){
-        endOfRestBetweenWaterings=endOfWatering.plusHours(plant
-                .getConditions()
-                .getWatering()
-                .getPeriod()
-                .getDays());
-    }
+
+//    void resolveTheDateOfEndOfWatering(LocalDateTime startOfWatering, Plant plant){
+//        endOfWatering=startOfWatering.plusHours(plant
+//                .getConditions()
+//                .getWatering()
+//                .getDuration()
+//                .toHours());
+//    }
+
+//    void resolveTheDateOfRestBetweenWaterings(LocalDateTime endOfWatering, Plant plant){
+//        endOfRestBetweenWaterings=endOfWatering.plusHours(plant
+//                .getConditions()
+//                .getWatering()
+//                .getPeriod()
+//                .getDays());
+//    }
 }

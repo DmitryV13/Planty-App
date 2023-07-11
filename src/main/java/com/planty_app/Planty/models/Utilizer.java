@@ -1,15 +1,13 @@
 package com.planty_app.Planty.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.With;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @With
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,13 +20,13 @@ public class Utilizer {
     private String name;
     private String surname;
     private String login;
-    private Role role;
+    private Role role=Role.USER;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Credentials credentials;
     
     //двусторонняя связь для доступа растений
     //из юзера при помощи репозитория
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "utilizer")
+    @OneToMany(mappedBy = "utilizer",cascade = CascadeType.ALL)
     private List<MyPlantSample> myPlantSamples;
 }

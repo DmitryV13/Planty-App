@@ -5,6 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @With
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +16,7 @@ public class Plant {
     private Long id;
     
     private String name;
-    private String photo;
+    private byte[] photo;
     
     @ManyToOne(cascade = CascadeType.ALL)
     private History history;
@@ -25,5 +26,4 @@ public class Plant {
     
     @ManyToOne(cascade = CascadeType.ALL)
     private Conditions conditions;
-    
 }

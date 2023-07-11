@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="1300">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <!--    <link>//icon-->
     <link type="text/css" rel="stylesheet" href="../../static/styles/myGarden.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <title>Planty</title>
 </head>
 <body>
@@ -13,41 +18,18 @@
 <div class="wrapper">
     <!--header-->
     <div id="lock"></div>
-    <header>
-        <div class="container">
-            <div class="header__container">
-                <div class="header__logo">
-                    Planty
-                </div>
-                <div class="menu">
-                    <div class="menu__icon">
-                        <span></span>
-                    </div>
-                    <nav class="header__menu">
-                        <ul class="header__list">
-                            <li class="header__list-item">
-                                <a href="#sign_in" class="popup-link">HOME</a></li>
-                            <li class="header__list-item">
-                                <a href="#sign_in" class="popup-link">MY GARDEN</a></li>
-                            <li class="header__list-item">
-                                <a href="">ABOUT US</a></li>
-                            <li class="header__list-item">
-                                <a href="#sign_in" class="popup-link">SIGN IN</a></li>
-                            <li class="header__list-item">
-                                <a href="" class="">(0 6 9) 5 3 8 3 6 3</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
+    <header th:insert="~{pages/components/header::home-header}">
     </header>
     <!--/header-->
 
     <!--body-->
     <main>
         <div class="container">
-            <div class="greeting">Welcome User !</div>
+            <div th:text="'Welcome ' + ${utilizer.getName()} + ' ' + ${utilizer.getSurname()} +'!'"
+                 class="greeting"></div>
             <div class="main__container">
+
+                <!--                tasks-->
                 <div class="garden__tasks">
                     <div class="garden__tasks-body">
                         <div class="tasks-title title">Tasks</div>
@@ -90,6 +72,9 @@
 
                     </div>
                 </div>
+                <!--                tasks-->
+
+                <!--                garden-->
                 <div class="garden">
                     <div class="garden-body">
                         <div class="garden-title">
@@ -99,89 +84,183 @@
                         </div>
                         <div class="garden-plants">
 
+                            <div class="plants-find">
+                                <input class="find-input" type="text" name="findPlant" placeholder="Search new plants">
+                                <button type="submit" class="find-button"><img src="../../static/icons/find.png"
+                                                                               class="find-button-icon"></button>
+                            </div>
+
                             <!--item for js-->
-                            <div class="plants-item">
-                                <div class="plants-item-photo"><img src="../../static/images/chamomile.png"></div>
-                                <div class="plants-item-text">
-                                    <div class="plants-item-property">
-                                        <div class="plants-item-name">Name:</div>
-                                        <div class="plants-item-value">Romashka</div>
+                            <div th:each="plantSample : ${plantSamples}" class="">
+                                <a href="#properties" class="plants-item popup-link">
+                                    <div class="plants-item-photo"><img alt="Chamomile" src="../../static/images/chamomile.png"></div>
+                                    <div class="plants-item-text">
+                                        <div class="plants-item-property">
+                                            <div class="plants-item-name">Name:</div>
+                                            <div class="plants-item-value"
+                                                 th:text="${plantSample.getPlant().getName()}"></div>
+                                        </div>
+                                        <div class="plants-item-property">
+                                            <div class="plants-item-name">Age:</div>
+                                            <div class="plants-item-value"
+                                                 th:text="${plantSample.getPlantAge().getDays()+ ' days'}"></div>
+                                        </div>
                                     </div>
-                                    <div class="plants-item-property">
-                                        <div class="plants-item-name">Age:</div>
-                                        <div class="plants-item-value">87</div>
+                                </a>
+                                <div id="properties" class="garden__properties popup">
+                                    <div class="garden__properties-body popup-body">
+                                        <div class="garden__properties-content popup content">
+                                            <div class="garden__properties-content-forscroll">
+                                                <div class="properties-title title">Properties</div>
+                                                <div class="properties-icon"></div>
+
+                                                <div class="properties-items">
+
+                                                    <!--item for js-->
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Name:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getName()}"></div>
+                                                    </div>
+                                                    <!---->
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Species:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getHistory().getSpecies()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Family:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getHistory().getFamily()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Appearance description:
+                                                        </div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getDescription().getExternal()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Fragmentation:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getDescription().getFragmentation()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Protection status:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getDescription().getProtectionStatus().getStatus()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Temperature:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getTemperature()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Humidity:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getHumidity()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Lighting:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getLighting()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Soil:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getSoil()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Fertilizer:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getFertilizer()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Transplantation:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getTransplantation()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Threats:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getThreats()}"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!---->
-                            <div class="plants-item">
-                                <div class="plants-item-photo"><img src="../../static/images/chamomile.png"></div>
-                                <div class="plants-item-photo"></div>
-                                <div class="plants-item-text">
-                                    <div class="plants-item-property">
-                                        <div class="plants-item-name">Name:</div>
-                                        <div class="plants-item-value">Romashka uyviyoviuogiugiuogigiu</div>
-                                    </div>
-                                    <div class="plants-item-property">
-                                        <div class="plants-item-name">Age:</div>
-                                        <div class="plants-item-value">87</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="plants-new">
-                                <img src="../../static/icons/plus.png">
-                            </div>
-
                         </div>
                     </div>
                 </div>
-                <div class="properties">
-                    <div class="properties-link">
-                        <a href="#properties" class="popup-link">PROPERTIES</a>
+                <!--                garden-->
+
+                <!--calendar-->
+                <div class="calendar-wrapper">
+                    <div class="calendar-header">
+                        <p class="current-date"></p>
+                    </div>
+                    <div class="calendar">
+                        <ul class="weeks">
+                            <li>Su</li>
+                            <li>Mo</li>
+                            <li>Tu</li>
+                            <li>We</li>
+                            <li>Th</li>
+                            <li>Fr</li>
+                            <li>Sa</li>
+                        </ul>
+                        <ul class="days"></ul>
+                    </div>
+                </div>
+                <!--calendar-->
+
+            </div>
+        </div>
+
+        <!--        user-info-box-->
+        <div id="user-info" class="user-info popup">
+            <div class="user-info-body popup__body">
+                <div class="user-info-content popup__content">
+                    <div class="user-info-background"></div>
+                    <div class="user-icon">
+                        <div class="user-icon-head"></div>
+                        <div class="user-icon-body"></div>
+                    </div>
+                    <div th:text="${utilizer.getName()} + ' ' + ${utilizer.getSurname()}" class="user-name"></div>
+                    <div th:text="'@'+${utilizer.getLogin()}" class="user-login sign-out-item"></div>
+                    <div th:replace="${utilizer.getRole().toString().equals('ADMIN')} ? ~{pages/components/toolbars::adminToolbar} : ~{}"></div>
+                    <div th:replace="${utilizer.getRole().toString().equals('MODERATOR')} ? ~{pages/components/toolbars::moderatorToolbar} : ~{}"></div>
+                    <div class="user-info-link">
+                        <img class="sign-out-icon" src="../../static/icons/sign-out.png">
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" class="sign-out-button" value="Sign out">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="properties" class="garden__properties popup">
-            <div class="garden__properties-body popup-body">
-                <div class="garden__properties-content popup content">
-                    <div class="properties-title title">Properties</div>
-                    <div class="properties-icon"></div>
-
-                    <div class="properties-items">
-
-                        <!--item for js-->
-                        <div class="properties-item">
-                            <div class="properties-item-property">Светолюбивый:</div>
-                            <div class="properties-item-value">Очень</div>
-                        </div>
-                        <!---->
-                        <div class="properties-item">
-                            <div class="properties-item-property">Светолый:</div>
-                            <div class="properties-item-value">Очеhkgcuykky l;sdfhighipsdh iasdifjbi;;sdj ;ihand;lhno; sidfhaer hjoia;dh atisslif jf'lfjs fcjy fjflff jнь</div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <!--        user-info-box-->
     </main>
     <!--/body-->
 
     <!--footer-->
-    <footer>
-        <div class="container">
-            <div class="footer__container">
-                <p class="footer__text">© 2023 All rights reserved</p>
-            </div>
-        </div>
+    <footer th:insert="~{pages/components/footer::footer}">
     </footer>
     <!--/footer-->
 </div>
-
-<script src="../../static/scrypts/find-plant.js"></script>
+<script src="../../static/scrypts/myGarden.js"></script>
 </body>
 
 </html>
