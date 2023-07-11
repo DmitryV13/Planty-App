@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/plantInfo.css">
+    <title>Planty</title>
+</head>
+<body>
+<div class="wrapper">
+    <!--header-->
+    <header th:insert="~{pages/components/header::header}">
+    </header>
+    <!--header-->
+
+    <!--main-->
+    <main class="main">
+        <div class="container">
+            <div class="main__container">
+                <div class="plant-title">Plant</div>
+                <div th:object="${plant}" class="plant-info-body">
+                    <div class="plant-photo">
+                        <img src="../../static/images/chamomile.png">
+                    </div>
+                    <div class="plant-info">
+                        <div class="info-item">
+                            <div class="item-property">Plant's name:</div>
+                            <div th:text="${plant.getName()}" class="item-value"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's family:</div>
+                            <div th:text="*{getHistory().getFamily()}" class="item-value"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's species:</div>
+                            <div th:text="*{getHistory().getSpecies()}" class="item-value"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's external:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getDescription().getExternal()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's fragmentation:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getDescription().getFragmentation()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Protection status</div>
+                            <div th:text="*{getDescription().getProtectionStatus().toString()}"
+                                 class="item-value"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's temperature:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getConditions().getTemperature()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's humidity:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getConditions().getHumidity()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's lighting:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getConditions().getLighting()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's soil:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getConditions().getSoil()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's fertilizer:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getConditions().getFertilizer()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's transplantation:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getConditions().getTransplantation()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's threats:</div>
+                            <div class="textarea-content">
+                                <div th:text="*{getConditions().getThreats()}" class="textarea"></div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's watering periods:</div>
+                            <div th:text="*{getConditions().getWatering().getAmountOfWaterKey()}"
+                                 class="item-value"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Plant's watering amount:</div>
+                            <div th:text="*{getConditions().getWatering().getAmountOfWaterValue()}"
+                                 class="item-value"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">Period:</div>
+                            <div th:text="*{getConditions().getWatering().getPeriod()}" class="item-value"></div>
+                        </div>
+                    </div>
+                    <div class="delete-plant-link">
+                        <a th:href="@{/deletePlant/{id}(id=${plant.id})}" class="delete-plant">Delete</a>
+                    </div>
+                    <div class="viewAll-link">
+                        <a th:href="@{/viewAllPlants}" class="viewAll">View all plants</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--main-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--footer-->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!--MODERATOR__TOOLBAR-->
+<div class="add-tools" th:fragment="moderatorToolbar">
+    <div class="user-info-link">
+        <img class="sign-out-icon" src="../../../static/icons/tool1.png">
+        <a th:href="@{/createNewPlants}" class="sign-out-button">Create new plants</a>
+    </div>
+</div>
+
+
+<!--ADMIN__TOOLBAR-->
+<div class="add-tools" th:fragment="adminToolbar">
+    <div class="user-info-link">
+        <img class="sign-out-icon" src="../../../static/icons/tool1.png">
+        <a th:href="@{/createNewPlants}" class="sign-out-button">Create new plants</a>
+    </div>
+    <div class="user-info-link">
+        <img class="sign-out-icon" src="../../../static/icons/tool1.png">
+        <a th:href="@{/viewAllPlants}" class="sign-out-button">View all plants</a>
+    </div>
+    <div class="user-info-link">
+        <img class="sign-out-icon" src="../../../static/icons/tool1.png">
+        <a th:href="@{/createUsers}" class="sign-out-button">Create users</a>
+    </div>
+    <div class="user-info-link">
+        <img class="sign-out-icon" src="../../../static/icons/tool1.png">
+        <a th:href="@{/viewAllUsers}" class="sign-out-button">View all users</a>
+    </div>
+</div>
