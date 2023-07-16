@@ -26,8 +26,9 @@
                 <div class="users-list">
                     <div th:each="user : ${users}" class="user-item">
                         <div class="user-icon">
-                            <div class="user-icon-head"></div>
-                            <div class="user-icon-body"></div>
+                            <img th:src="@{'data:image/jpeg;base64,' + ${user.getBase64Avatar()}}">
+<!--                            <div class="user-icon-head"></div>-->
+<!--                            <div class="user-icon-body"></div>-->
                         </div>
                         <div class="user-info">
                             <div class="info-item">

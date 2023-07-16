@@ -259,6 +259,14 @@ main {
     border: solid 1px #00b9fb;
 }
 
+.textarea-content.valid{
+    border: solid 1px #3ECE93FF;
+}
+
+.textarea-content.invalid{
+    border: solid 1px #fb003b;
+}
+
 textarea{
     width: 100%;
     height: 150px;
@@ -319,8 +327,87 @@ select{
     border: solid 1px transparent;
 }
 
+input[type="file"]{
+    display: none;
+}
+
+.file-input-body{
+    padding:10px 0;
+    display: flex;
+}
+
+.file-label{
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: Montserrat;
+    font-size: 15px;
+    line-height: 1.2;
+    color: white;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #0095fb 70% , #0095fb 100%);
+    border-radius: 20px;
+    transition: all 0.6s ease 0s;
+    position: relative;
+    z-index: 2;
+}
+
+.file-label i{
+    margin-right: 7px;
+}
+
+.file-label::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #0095fb 70% , #00fbb0 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: -1;
+}
+
+.file-label:hover::before{
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+
+.chosen-file{
+    flex-grow: 1;
+    margin-left: 15px;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.chosen-file.valid{
+    border: solid 1px #3ECE93FF;
+}
+
+.chosen-file.invalid{
+    border: solid 1px #fb003b;
+}
+
+.extension-error{
+    color: #fb003b;
+    text-align: center;
+}
+
 .tools-input:focus{
     border: solid 1px #00b9fb;
+}
+
+.tools-input.invalid{
+    border: solid 1px #fb003b;
+}
+
+.tools-input.valid{
+    border: solid 1px #3ECE93FF;
 }
 
 .tools-history {
@@ -342,7 +429,7 @@ select{
     padding: 10px 30px;
     background: rgb(62 206 147);
     border-radius: 20px;
-    transition: all 0.8s ease 0s;
+    transition: all 0.6s ease 0s;
 }
 
 .tools-button:hover{

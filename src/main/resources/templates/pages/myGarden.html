@@ -78,22 +78,28 @@
                 <div class="garden">
                     <div class="garden-body">
                         <div class="garden-title">
-                            <div class="garden-title-icon"><img src="../../static/icons/rose.png"></div>
+                            <div class="garden-title-icon"><i class="fa-solid fa-sun"></i></div>
                             <div class="garden-title-title"> My Garden</div>
-                            <div class="garden-title-icon"><img src="../../static/icons/rose.png"></div>
+                            <div class="garden-title-icon"><i class="fa-solid fa-seedling"></i></div>
                         </div>
                         <div class="garden-plants">
 
                             <div class="plants-find">
-                                <input class="find-input" type="text" name="findPlant" placeholder="Search new plants">
-                                <button type="submit" class="find-button"><img src="../../static/icons/find.png"
-                                                                               class="find-button-icon"></button>
+                                <form method="post" th:action="@{/findPlant}">
+                                    <input class="find-input" type="text" name="findPlant"
+                                           placeholder="Search new plants">
+                                    <button type="submit" class="find-button">
+                                        <img src="../../static/icons/find.png" class="find-button-icon">
+                                    </button>
+                                </form>
                             </div>
 
                             <!--item for js-->
                             <div th:each="plantSample : ${plantSamples}" class="">
-                                <a href="#properties" class="plants-item popup-link">
-                                    <div class="plants-item-photo"><img alt="Chamomile" src="../../static/images/chamomile.png"></div>
+                                <a th:href="@{'properties' + ${plantSample.getId()}}" class="plants-item popup-link">
+                                    <div class="plants-item-photo"><img
+                                            th:src="@{'data:image/jpeg;base64,' + ${plantSample.getPlant().getBase64Photo()}}">
+                                    </div>
                                     <div class="plants-item-text">
                                         <div class="plants-item-property">
                                             <div class="plants-item-name">Name:</div>
@@ -103,11 +109,11 @@
                                         <div class="plants-item-property">
                                             <div class="plants-item-name">Age:</div>
                                             <div class="plants-item-value"
-                                                 th:text="${plantSample.getPlantAge().getDays()+ ' days'}"></div>
+                                                 th:text="${plantSample.getPlantAge() + ' days'}"></div>
                                         </div>
                                     </div>
                                 </a>
-                                <div id="properties" class="garden__properties popup">
+                                <div th:id="'properties' + ${plantSample.getId()}" class="garden__properties popup">
                                     <div class="garden__properties-body popup-body">
                                         <div class="garden__properties-content popup content">
                                             <div class="garden__properties-content-forscroll">
@@ -195,6 +201,11 @@
                                                         <div class="properties-item-value"
                                                              th:text="${plantSample.getPlant().getConditions().getThreats()}"></div>
                                                     </div>
+                                                    <div class="properties-item">
+                                                        <div class="delete-plant-link">
+                                                            <a th:href="@{/deletePlantFromGarden/{plantId}(plantId=${plantSample.getId()})}" class="delete-plant">Delete</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -234,12 +245,13 @@
             <div class="user-info-body popup__body">
                 <div class="user-info-content popup__content">
                     <div class="user-info-background"></div>
-                    <div class="user-icon">
-                        <div class="user-icon-head"></div>
-                        <div class="user-icon-body"></div>
-                    </div>
+                    <div th:replace="${utilizer.getBase64Avatar()==null} ? ~{pages/components/icons::userDefault} : ~{pages/components/icons::userAvatar}"></div>
                     <div th:text="${utilizer.getName()} + ' ' + ${utilizer.getSurname()}" class="user-name"></div>
                     <div th:text="'@'+${utilizer.getLogin()}" class="user-login sign-out-item"></div>
+                    <div class="user-info-link">
+                        <img class="sign-out-icon" src="../../../static/icons/tool1.png">
+                        <a th:href="@{/changeAvatar}" class="sign-out-button">Change avatar</a>
+                    </div>
                     <div th:replace="${utilizer.getRole().toString().equals('ADMIN')} ? ~{pages/components/toolbars::adminToolbar} : ~{}"></div>
                     <div th:replace="${utilizer.getRole().toString().equals('MODERATOR')} ? ~{pages/components/toolbars::moderatorToolbar} : ~{}"></div>
                     <div class="user-info-link">
@@ -260,6 +272,7 @@
     </footer>
     <!--/footer-->
 </div>
+<script src="https://kit.fontawesome.com/d8b11843d3.js" crossorigin="anonymous"></script>
 <script src="../../static/scrypts/myGarden.js"></script>
 </body>
 

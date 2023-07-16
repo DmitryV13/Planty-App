@@ -9,6 +9,7 @@
     <meta http-equiv="Expires" content="0">
     <!--    <link>//icon-->
     <link type="text/css" rel="stylesheet" href="../../static/styles/addTools.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Planty</title>
 </head>
 <body>
@@ -22,24 +23,24 @@
     <main>
         <div class="container">
             <div class="main__container">
-                <form method="post" th:object="${newPlant}" th:action="@{/createNewPlant}" class="tools-form-body">
+                <form enctype="multipart/form-data" id="form" method="post" th:object="${newPlant}" th:action="@{/createNewPlant}" class="tools-form-body">
                     <div class="tools-form-title">Add new plant</div>
                     <div class="tools-plant">
                         <div class="tools-item">
                             <label for="plantName" class="tools-label">Plant's name:</label>
-                            <input th:field="*{name}" type="text" id="plantName" name="plantName" class="tools-input"
+                            <input minlength="8" maxlength="50" required th:field="*{name}" type="text" id="plantName" name="plantName" class="tools-input"
                                    tabindex="1">
                         </div>
                     </div>
                     <div class="tools-history">
                         <div class="tools-item">
                             <label for="plantFamily" class="tools-label">Plant's family:</label>
-                            <input th:field="*{history.family}" type="text" id="plantFamily" name="plantFamily"
+                            <input minlength="8" maxlength="50" required th:field="*{history.family}" type="text" id="plantFamily" name="plantFamily"
                                    class="tools-input" tabindex="1">
                         </div>
                         <div class="tools-item">
                             <label for="plantSpecies" class="tools-label">Plant's species:</label>
-                            <input th:field="*{history.species}" type="text" id="plantSpecies" name="plantSpecies"
+                            <input minlength="8" maxlength="50" required th:field="*{history.species}" type="text" id="plantSpecies" name="plantSpecies"
                                    class="tools-input" tabindex="1">
                         </div>
                     </div>
@@ -47,7 +48,7 @@
                         <div class="tools-item">
                             <label for="plantExternal" class="tools-label">Plant's external:</label>
                             <div tabindex="0" class="textarea-content">
-                                <textarea th:field="*{description.external}" id="plantExternal" name="plantExternal"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{description.external}" id="plantExternal" name="plantExternal"
                                           class="tools-input"
                                           placeholder="Enter info about plant's external" tabindex="1"></textarea>
                             </div>
@@ -55,7 +56,7 @@
                         <div class="tools-item">
                             <label for="plantFragmentation" class="tools-label">Plant's fragmentation:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{description.fragmentation}" id="plantFragmentation"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{description.fragmentation}" id="plantFragmentation"
                                           name="plantFragmentation" class="tools-input"
                                           placeholder="Enter info about plant's fragmentation" tabindex="1"></textarea>
                             </div>
@@ -73,7 +74,7 @@
                         <div class="tools-item">
                             <label for="plantTemperature" class="tools-label">Plant's temperature:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{conditions.temperature}" id="plantTemperature"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{conditions.temperature}" id="plantTemperature"
                                           name="plantTemperature" class="tools-input"
                                           placeholder="Enter info about favorable temperature" tabindex="1"></textarea>
                             </div>
@@ -81,7 +82,7 @@
                         <div class="tools-item">
                             <label for="plantHumidity" class="tools-label">Plant's humidity:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{conditions.humidity}" id="plantHumidity" name="plantHumidity"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{conditions.humidity}" id="plantHumidity" name="plantHumidity"
                                           class="tools-input"
                                           placeholder="Enter info about favorable humidity" tabindex="1"></textarea>
                             </div>
@@ -89,7 +90,7 @@
                         <div class="tools-item">
                             <label for="plantLighting" class="tools-label">Plant's lighting:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{conditions.lighting}" id="plantLighting" name="plantLighting"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{conditions.lighting}" id="plantLighting" name="plantLighting"
                                           class="tools-input"
                                           placeholder="Enter info about favorable lighting" tabindex="1"></textarea>
                             </div>
@@ -97,7 +98,7 @@
                         <div class="tools-item">
                             <label for="plantSoil" class="tools-label">Plant's soil:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{conditions.soil}" id="plantSoil" name="plantSoil"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{conditions.soil}" id="plantSoil" name="plantSoil"
                                           class="tools-input"
                                           placeholder="Enter info about favorable soil" tabindex="1"></textarea>
                             </div>
@@ -105,7 +106,7 @@
                         <div class="tools-item">
                             <label for="plantFertilizer" class="tools-label">Plant's fertilizer:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{conditions.fertilizer}" id="plantFertilizer"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{conditions.fertilizer}" id="plantFertilizer"
                                           name="plantFertilizer" class="tools-input"
                                           placeholder="Enter info about plant's fertilizer" tabindex="1"></textarea>
                             </div>
@@ -113,7 +114,7 @@
                         <div class="tools-item">
                             <label for="plantTransplantation" class="tools-label">Plant's transplantation:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{conditions.transplantation}" id="plantTransplantation"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{conditions.transplantation}" id="plantTransplantation"
                                           name="plantTransplantation" class="tools-input"
                                           placeholder="Enter info about plant's transplantation"
                                           tabindex="1"></textarea>
@@ -122,28 +123,37 @@
                         <div class="tools-item">
                             <label for="plantThreats" class="tools-label">Plant's threats:</label>
                             <div class="textarea-content">
-                                <textarea th:field="*{conditions.threats}" id="plantThreats" name="plantThreats"
+                                <textarea minlength="20" maxlength="1000" required th:field="*{conditions.threats}" id="plantThreats" name="plantThreats"
                                           class="tools-input"
                                           placeholder="Enter info about plant's threats" tabindex="1"></textarea>
                             </div>
                         </div>
                     </div>
+                    <div class="tools-item">
+                        <div class="tools-label">Plant's photo:</div>
+                        <div class="file-input-body">
+                            <label for="avatar" class="file-label"><i class="fa-solid fa-upload"></i>Add file</label>
+                            <input multiple="false" required name="file" type="file" accept=".jpg,.jpeg,.png" id="avatar" tabindex="1">
+                            <div class="chosen-file"></div>
+                        </div>
+                        <div class="extension-error"></div>
+                    </div>
                     <div class="tools-watering">
                         <div class="tools-item">
                             <label for="plantWateringPeriods" class="tools-label">Plant's watering periods:</label>
-                            <input th:field="*{conditions.watering.amountOfWaterKey}" type="text"
+                            <input required th:field="*{conditions.watering.amountOfWaterKey}" type="text"
                                    id="plantWateringPeriods" name="plantWateringPeriods" class="tools-input"
                                    placeholder="Enter several numbers separated by commas" tabindex="1">
                         </div>
                         <div class="tools-item">
                             <label for="plantWateringAmount" class="tools-label">Plant's watering amount:</label>
-                            <input th:field="*{conditions.watering.amountOfWaterValue}" type="text"
+                            <input required th:field="*{conditions.watering.amountOfWaterValue}" type="text"
                                    id="plantWateringAmount" name="plantWateringAmount" class="tools-input"
                                    placeholder="Enter several numbers separated by commas" tabindex="1">
                         </div>
                         <div class="tools-item">
                             <label for="plantPeriod" class="tools-label">Period:</label>
-                            <input th:name="plantPeriod" type="number" id="plantPeriod" placeholder="Enter a number"
+                            <input required th:name="plantPeriod" th:value="${plantPeriod}" type="number" id="plantPeriod" placeholder="Enter a number"
                                    class="tools-input" tabindex="1">
                         </div>
                     </div>
@@ -163,5 +173,6 @@
     <!--footer-->
 </div>
 <script src="../../static/scrypts/textarea-scrollbar.js"></script>
+<script src="../../static/scrypts/form-validation.js"></script>
 </body>
 </html>

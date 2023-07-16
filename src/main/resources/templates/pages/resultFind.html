@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <!--    <link>//icon-->
-    <link type="text/css" rel="stylesheet" href="../../static/styles/viewAllPlants.css">
+    <link type="text/css" rel="stylesheet" href="../../static/styles/resultFind.css">
     <title>Planty</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
             <div class="main__container">
                 <div class="list-title">All current plants</div>
                 <div class="plants-list">
-                    <div th:each="plant : ${allPlants}" class="plants-item">
+                    <div th:each="plant : ${result}" class="plants-item">
                         <div class="plants-photo">
                             <img th:src="@{'data:image/jpeg;base64,' + ${plant.getBase64Photo()}}">
                         </div>
@@ -39,10 +39,28 @@
                             </div>
                         </div>
                         <div class="inspect-link">
-                            <a th:href="@{/plantInfo/{plantId}(plantId=${plant.getId()})}" class="inspect">Inspect</a>
+                            <a th:href="@{/plantView/{plantId}(plantId=${plant.getId()})}" class="inspect">More info</a>
+                            <a href="#add" class="add popup-link">Add</a>
+                        </div>
+                        <div id="add" class="add-popup popup">
+                            <div class="add-body popup__body">
+                                <form method="post" th:action="@{/addPlantToMyGarden/{plantId}(plantId=${plant.getId()})}" class="add-content popup__content">
+                                    <div class="add-title">Add plant to my garden</div>
+                                    <div class="tools-item">
+                                        <label for="age" class="tools-label">Age in days:</label>
+                                        <input required name="age" type="number" id="age" class="tools-input"
+                                               tabindex="1">
+                                    </div>
+                                    <div class="add-link">
+                                        <button type="submit"
+                                           class="add-form-link popup-link">Add</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
@@ -53,6 +71,6 @@
     </footer>
     <!--footer-->
 </div>
-
+<script src="../../static/scrypts/popup.js"></script>
 </body>
 </html>

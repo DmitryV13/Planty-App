@@ -121,9 +121,10 @@ h6 {
 }
 
 .container {
-    padding: 0 20px;
-    width: 1200px;
-    margin: 0 auto;
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header {
@@ -219,165 +220,31 @@ main {
     flex: 1 0 auto;
 }
 
-.main__container{
-    margin: 35px ;
+.tools-form-body {
+    width: 60%;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
 }
 
-.list-title {
+.tools-form-title {
     font-family: Montserrat;
     font-size: 30px;
     text-align: center;
     color: #494949;
     margin-top: 30px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 }
 
-.plants-list {
+.tools-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-bottom: 22px;
 }
 
-.plants-item {
-    width: 60%;
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-    display: flex;
-    justify-content: space-between;
-}
-
-.plants-photo img{
-    width: 110px;
-    border-radius: 50%;
-}
-
-.plants-info {
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.list-info-item {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    background: white;
-    border-radius: 10px;
-    border-bottom:solid 1px #33aaff;
-}
-
-.list-info-item:last-child{
-    margin-bottom: 0;
-}
-
-.list-item-property {
-    font-family: "Gill Sans";
-    padding-left: 8px;
-    font-size: 18px;
-    color: #494949;
-    width: 60px;
-}
-
-.list-item-value {
-    flex: 1 0 auto;
-    padding: 10px 15px;
-}
-
-.inspect-link {
-    width: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-}
-
-.inspect {
-    cursor: pointer;
-    font-family: Montserrat;
-    font-size: 20px;
-    color: white;
-    align-self: center;
-    padding: 10px 30px;
-    background: #33aaff;
-    border-radius: 20px;
-    transition: all 0.8s ease 0s;
-}
-
-.inspect:hover{
-    padding: 10px 50px;
-    transition: all 0.6s ease 0s;
-}
-
-.user-info-body {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 400px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.user-icon{
-    align-self: center;
-}
-
-.user-icon img{
-    width: 110px;
-    border-radius: 50%;
-}
-
-/*.user-icon {*/
-/*    align-self: center;*/
-/*    background: rgb(53 159 198);*/
-/*    border-radius: 50%;*/
-/*    border:solid 1px rgb(53 159 198);*/
-/*    width: 110px;*/
-/*    height: 110px;*/
-/*    position: relative;*/
-/*    overflow: hidden;*/
-/*    margin-bottom: 25px;*/
-/*}*/
-
-/*.user-icon-head {*/
-/*    background: white;*/
-/*    position: absolute;*/
-/*    top: 20%;*/
-/*    left: calc(50% - 18%);*/
-/*    width: 36%;*/
-/*    height: 36%;*/
-/*    border-radius: 50%;*/
-/*}*/
-
-/*.user-icon-body {*/
-/*    background: white;*/
-/*    position: absolute;*/
-/*    bottom: -40%;*/
-/*    left: calc(50% - 40%);*/
-/*    width: 80%;*/
-/*    height: 80%;*/
-/*    border-radius: 45%;*/
-/*}*/
-
-.user-info {
-}
-
-.info-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 7px 10px;
-    margin-bottom: 15px;
-}
-
-.password{
-    overflow: hidden;
-}
-
-.item-property {
+.tools-label {
     font-family: "Gill Sans";
     font-size: 18px;
     color: #494949;
@@ -385,78 +252,95 @@ main {
     padding-left: 15px;
 }
 
-.item-value {
+.tools-input {
     border-radius: 10px;
-    background: white;
     padding: 10px 15px;
-    border: solid 1px #00b9fb;
+    border: solid 1px transparent;
 }
 
-.delete-user-link {
+input[type="file"]{
+    display: none;
+}
+
+.file-input-body{
+    padding:10px 0;
+    display: flex;
+}
+
+.file-label{
+    flex-shrink: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-}
-
-.delete-user {
-    font-family: Montserrat;
-    font-size: 20px;
-    color: white;
-    align-self: center;
-    padding: 10px 30px;
-    margin-top: 15px;
-    background: rgb(255 61 61);
-    border-radius: 20px;
-    transition: all 0.8s ease 0s;
-}
-
-.delete-user:hover{
-    padding: 10px 50px;
-    transition: all 0.6s ease 0s;
-    cursor: pointer;
-}
-
-.delete-plant-link {
-    width: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-}
-
-.delete-plant {
-    font-family: Montserrat;
-    font-size: 20px;
-    color: white;
-    align-self: center;
-    padding: 10px 30px;
-    margin-top: 15px;
-    background: rgb(255 61 61);
-    border-radius: 20px;
-    transition: all 0.8s ease 0s;
-}
-
-.delete-plant:hover{
-    padding: 10px 50px;
-    transition: all 0.6s ease 0s;
-    cursor: pointer;
-}
-
-.viewAll-link{
-    align-self: center;
-    margin: 15px 10px;
-}
-
-.viewAll{
     cursor: pointer;
     font-family: Montserrat;
     font-size: 15px;
-    color: #797979;
-    transition: all 0.2s ease 0s;
+    line-height: 1.2;
+    color: white;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #0095fb 70% , #0095fb 100%);
+    border-radius: 20px;
+    transition: all 0.6s ease 0s;
+    position: relative;
+    z-index: 2;
 }
 
-.viewAll:hover{
-    color:rgb(62 206 147);
-    transition: all 0.2s ease 0s;
+.file-label i{
+    margin-right: 7px;
+}
+
+.file-label::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #0095fb 70% , #00fbb0 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: -1;
+}
+
+.file-label:hover::before{
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+
+.chosen-file{
+    flex-grow: 1;
+    margin-left: 15px;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.chosen-file.valid{
+    border: solid 1px #3ECE93FF;
+}
+
+.chosen-file.invalid{
+    border: solid 1px #fb003b;
+}
+
+.extension-error{
+    color: #fb003b;
+    text-align: center;
+}
+
+.tools-button{
+    font-family: Montserrat;
+    font-size: 20px;
+    color: white;
+    align-self: center;
+    padding: 10px 30px;
+    background: rgb(62 206 147);
+    border-radius: 20px;
+    transition: all 0.6s ease 0s;
+}
+
+.tools-button:hover{
+    padding: 10px 50px;
+    transition: all 0.6s ease 0s;
 }

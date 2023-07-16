@@ -9,6 +9,7 @@
     <meta http-equiv="Expires" content="0">
     <!--    <link>//icon-->
     <link type="text/css" rel="stylesheet" href="../../static/styles/addTools.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Planty</title>
 </head>
 <body>
@@ -22,16 +23,16 @@
     <main>
         <div class="container">
             <div class="main__container">
-                <form method="post" th:object="${user}" th:action="@{/createUser}" class="tools-form-body user">
+                <form enctype="multipart/form-data" method="post" th:object="${user}" th:action="@{/createUser(avatar=${avatar},password=${password})}" id="form" class="tools-form-body user">
                     <div class="tools-form-title">Create new user</div>
                     <div class="tools-user">
                         <div class="tools-item">
                             <label th:for="name" class="tools-label">New user's name:</label>
-                            <input th:field="*{name}" type="text" id="name" class="tools-input" tabindex="1">
+                            <input minlength="8" maxlength="30" required name="name" th:field="*{name}" type="text" id="name" class="tools-input" tabindex="1">
                         </div>
                         <div class="tools-item">
                             <label th:for="surname" class="tools-label">New user's surname:</label>
-                            <input th:field="*{surname}" type="text" id="surname" class="tools-input" tabindex="1">
+                            <input minlength="8" maxlength="30" required name="surname" th:field="*{surname}" type="text" id="surname" class="tools-input" tabindex="1">
                         </div>
                         <div class="tools-item">
                             <label th:for="status" class="tools-label">New user's status</label>
@@ -43,11 +44,20 @@
                         </div>
                         <div class="tools-item">
                             <label th:for="login" class="tools-label">New user's login:</label>
-                            <input th:field="*{login}" type="text" id="login" class="tools-input" tabindex="1">
+                            <input minlength="10" maxlength="30" required name="login" th:field="*{login}" type="text" id="login" class="tools-input" tabindex="1">
+                        </div>
+                        <div class="tools-item">
+                            <div class="tools-label">User's avatar:</div>
+                            <div class="file-input-body">
+                                <label for="avatar" class="file-label"><i class="fa-solid fa-upload"></i>Add file</label>
+                                <input multiple="false" required name="file" type="file" accept=".jpg,.jpeg,.png" id="avatar" tabindex="1">
+                                <div class="chosen-file"></div>
+                            </div>
+                            <div class="extension-error"></div>
                         </div>
                         <div class="tools-item">
                             <label th:for="password" class="tools-label">New user's password:</label>
-                            <input th:name="password" type="text" id="password" class="tools-input" tabindex="1">
+                            <input minlength="8" maxlength="30" required name="password" type="text" id="password" class="tools-input" tabindex="1">
                         </div>
                     </div>
                     <button type="submit" class="tools-button">Create</button>
@@ -65,6 +75,6 @@
     </footer>
     <!--footer-->
 </div>
-
+<script src="../../static/scrypts/form-validation.js"></script>
 </body>
 </html>

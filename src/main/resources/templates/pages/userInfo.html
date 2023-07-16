@@ -25,8 +25,9 @@
                 <div class="list-title">User</div>
                 <div class="user-info-body">
                     <div class="user-icon">
-                        <div class="user-icon-head"></div>
-                        <div class="user-icon-body"></div>
+                        <img th:src="@{'data:image/jpeg;base64,' + ${user.getBase64Avatar()}}">
+<!--                        <div class="user-icon-head"></div>-->
+<!--                        <div class="user-icon-body"></div>-->
                     </div>
                     <div class="user-info">
                         <div class="info-item">
@@ -65,7 +66,7 @@
                 <div class="plants-list">
                     <div th:each="plant : *{getMyPlantSamples()}" class="plants-item">
                         <div class="plants-photo">
-                            <img src="../../static/images/chamomile.png">
+                            <img th:src="@{'data:image/jpeg;base64,' + ${plant.getPlant().getBase64Photo()}}">
                         </div>
                         <div class="plants-info">
                             <div class="list-info-item">

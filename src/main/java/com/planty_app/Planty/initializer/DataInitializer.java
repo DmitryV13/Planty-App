@@ -8,6 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.time.Period;
 
 @Component
@@ -50,11 +54,20 @@ public class DataInitializer implements CommandLineRunner {
                 .withTransplantation("A chamomile transplant may be needed if the plant has grown and become overcrowded in the current pot, or if the soil in it has become depleted.")
                 .withThreats("Threats to chamomile: lack of light, waterlogging or lack of moisture, poor soil, diseases and pests.")
                 .withWatering(watering1);
+        
+        String folder="D:\\Applications\\Demo\\Planty-App\\src\\main\\resources\\static\\images\\";
+        BufferedImage bImage = ImageIO.read(new File(folder,"chamomile.jpg"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "jpg", bos );
+        byte [] data = bos.toByteArray();
+        
         Plant plant1=new Plant()
                 .withName("Bellis perennis")
+                .withPhoto(data)
                 .withHistory(history1)
                 .withDescription(description1)
                 .withConditions(conditions1);
+        plant1.setBase64Photo(data);
         
         plantRepository.save(plant1);
         //PLANTS
@@ -62,12 +75,20 @@ public class DataInitializer implements CommandLineRunner {
         //ADMINISTRATOR
         Credentials adminCreds=new Credentials()
                 .withPassword(passwordEncoder.encode("password"));
+        
+        BufferedImage bImage2 = ImageIO.read(new File(folder,"cat.jpg"));
+        ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
+        ImageIO.write(bImage2, "jpg", bos2 );
+        byte [] data2 = bos2.toByteArray();
+        
         Utilizer administrator=new Utilizer()
                 .withName("admin")
                 .withSurname("admin")
                 .withLogin("admin")
+                .withAvatar(data2)
                 .withRole(Role.ADMIN)
                 .withCredentials(adminCreds);
+        administrator.setBase64Avatar(data2);
         
         utilizerRepository.save(administrator);
         //ADMINISTRATOR
@@ -89,12 +110,19 @@ public class DataInitializer implements CommandLineRunner {
         Credentials modCreds=new Credentials()
                 .withPassword(passwordEncoder.encode("pass"));
         
+        BufferedImage bImage3 = ImageIO.read(new File(folder,"owl.jpg"));
+        ByteArrayOutputStream bos3 = new ByteArrayOutputStream();
+        ImageIO.write(bImage3, "jpg", bos3 );
+        byte [] data3 = bos3.toByteArray();
+        
         Utilizer mod=new Utilizer()
                 .withName("moderator")
                 .withSurname("moderator")
                 .withLogin("mod")
+                .withAvatar(data3)
                 .withRole(Role.MODERATOR)
                 .withCredentials(modCreds);
+        mod.setBase64Avatar(data3);
         
         utilizerRepository.save(mod);
         //MODERATOR
@@ -102,11 +130,11 @@ public class DataInitializer implements CommandLineRunner {
         //MY SAMPLES
         MyPlantSample mySample1=new MyPlantSample()
                 .withPlant(plant1)
-                .withPlantAge(Period.ofDays(3))
+                .withPlantAge(3)
                 .withUtilizer(simpleUser);
         MyPlantSample mySample2= new MyPlantSample()
                 .withPlant(plant1)
-                .withPlantAge(Period.ofDays(3))
+                .withPlantAge(3)
                 .withUtilizer(simpleUser);
         myPlantSampleRepository.save(mySample1);
         myPlantSampleRepository.save(mySample2);

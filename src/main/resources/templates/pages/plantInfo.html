@@ -25,7 +25,7 @@
                 <div class="plant-title">Plant</div>
                 <div th:object="${plant}" class="plant-info-body">
                     <div class="plant-photo">
-                        <img src="../../static/images/chamomile.png">
+                        <img th:src="@{'data:image/jpeg;base64,' + ${plant.getBase64Photo()}}">
                     </div>
                     <div class="plant-info">
                         <div class="info-item">

@@ -245,6 +245,7 @@ main {
     box-shadow: 0 15px 40px rgba(0,0,0,0.12);
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
 }
 
 .plants-photo img{
@@ -288,6 +289,7 @@ main {
 .inspect-link {
     width: 200px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-left: 5px;
@@ -303,6 +305,7 @@ main {
     background: #33aaff;
     border-radius: 20px;
     transition: all 0.8s ease 0s;
+    margin-bottom: 10px;
 }
 
 .inspect:hover{
@@ -310,153 +313,112 @@ main {
     transition: all 0.6s ease 0s;
 }
 
-.user-info-body {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 400px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.user-icon{
+.add{
+    cursor: pointer;
+    font-family: Montserrat;
+    font-size: 20px;
+    color: white;
     align-self: center;
+    padding: 10px 30px;
+    background: rgb(62 206 147);
+    border-radius: 20px;
+    transition: all 0.8s ease 0s;
 }
 
-.user-icon img{
-    width: 110px;
-    border-radius: 50%;
+.add:hover{
+    padding: 10px 50px;
+    transition: all 0.6s ease 0s;
 }
 
-/*.user-icon {*/
-/*    align-self: center;*/
-/*    background: rgb(53 159 198);*/
-/*    border-radius: 50%;*/
-/*    border:solid 1px rgb(53 159 198);*/
-/*    width: 110px;*/
-/*    height: 110px;*/
-/*    position: relative;*/
-/*    overflow: hidden;*/
-/*    margin-bottom: 25px;*/
-/*}*/
-
-/*.user-icon-head {*/
-/*    background: white;*/
-/*    position: absolute;*/
-/*    top: 20%;*/
-/*    left: calc(50% - 18%);*/
-/*    width: 36%;*/
-/*    height: 36%;*/
-/*    border-radius: 50%;*/
-/*}*/
-
-/*.user-icon-body {*/
-/*    background: white;*/
-/*    position: absolute;*/
-/*    bottom: -40%;*/
-/*    left: calc(50% - 40%);*/
-/*    width: 80%;*/
-/*    height: 80%;*/
-/*    border-radius: 45%;*/
-/*}*/
-
-.user-info {
+.add-popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 2;
+    visibility: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all 0.5s ease 0s;
+    background: rgba(185, 190, 190, 0.35);
+    backdrop-filter: blur(5px);
 }
 
-.info-item {
+.add-popup.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.add-body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-content {
+    width: 550px;
+    height: 60%;
+    border-radius: 50px;
+    background: #f8f8f8;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 7px 10px;
-    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
-.password{
-    overflow: hidden;
+.add-title{
+    font-family: Montserrat;
+    font-size: 30px;
+    text-align: center;
+    color: #494949;
+    margin-bottom: 25px;
 }
 
-.item-property {
+.tools-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+}
+
+.tools-label {
     font-family: "Gill Sans";
     font-size: 18px;
     color: #494949;
     margin-bottom: 5px;
-    padding-left: 15px;
+    text-align: center;
 }
 
-.item-value {
+.tools-input {
     border-radius: 10px;
-    background: white;
     padding: 10px 15px;
+    border: solid 1px transparent;
+}
+
+.tools-input:focus{
     border: solid 1px #00b9fb;
 }
 
-.delete-user-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-}
-
-.delete-user {
+.add-form-link {
+    cursor: pointer;
     font-family: Montserrat;
     font-size: 20px;
     color: white;
     align-self: center;
     padding: 10px 30px;
-    margin-top: 15px;
-    background: rgb(255 61 61);
+    background: rgb(62 206 147);
     border-radius: 20px;
     transition: all 0.8s ease 0s;
 }
 
-.delete-user:hover{
+.add-form-link:hover{
     padding: 10px 50px;
     transition: all 0.6s ease 0s;
-    cursor: pointer;
 }
 
-.delete-plant-link {
-    width: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-}
-
-.delete-plant {
-    font-family: Montserrat;
-    font-size: 20px;
-    color: white;
-    align-self: center;
-    padding: 10px 30px;
-    margin-top: 15px;
-    background: rgb(255 61 61);
-    border-radius: 20px;
-    transition: all 0.8s ease 0s;
-}
-
-.delete-plant:hover{
-    padding: 10px 50px;
-    transition: all 0.6s ease 0s;
-    cursor: pointer;
-}
-
-.viewAll-link{
-    align-self: center;
-    margin: 15px 10px;
-}
-
-.viewAll{
-    cursor: pointer;
-    font-family: Montserrat;
-    font-size: 15px;
-    color: #797979;
-    transition: all 0.2s ease 0s;
-}
-
-.viewAll:hover{
-    color:rgb(62 206 147);
-    transition: all 0.2s ease 0s;
+.add-link {
+    margin-top: 20px;
 }

@@ -3,6 +3,8 @@ package com.planty_app.Planty.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Base64;
+
 @Entity
 @Getter
 @Setter
@@ -18,6 +20,9 @@ public class Plant {
     private String name;
     private byte[] photo;
     
+    @Column(columnDefinition = "VARCHAR(5000000)")
+    String base64Photo;
+    
     @ManyToOne(cascade = CascadeType.ALL)
     private History history;
     
@@ -26,4 +31,8 @@ public class Plant {
     
     @ManyToOne(cascade = CascadeType.ALL)
     private Conditions conditions;
+    
+    public void setBase64Photo(byte[] image){
+        this.base64Photo=Base64.getEncoder().encodeToString(image);
+    }
 }

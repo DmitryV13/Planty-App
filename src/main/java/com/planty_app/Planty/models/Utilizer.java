@@ -3,6 +3,7 @@ package com.planty_app.Planty.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Base64;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,11 @@ public class Utilizer {
     private String surname;
     private String login;
     private Role role=Role.USER;
+    @Lob
+    private byte[] avatar;
+    
+    @Column(columnDefinition = "VARCHAR(5000000)")
+    private String base64Avatar;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Credentials credentials;
@@ -29,4 +35,12 @@ public class Utilizer {
     //из юзера при помощи репозитория
     @OneToMany(mappedBy = "utilizer",cascade = CascadeType.ALL)
     private List<MyPlantSample> myPlantSamples;
+    
+    public void setBase64Avatar(byte[] image){
+        this.base64Avatar= Base64.getEncoder().encodeToString(image);
+    }
+    
+//    public String getBaseAvatar(){
+//
+//    }
 }

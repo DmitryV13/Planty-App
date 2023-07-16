@@ -16,4 +16,7 @@ public interface PlantRepository extends JpaRepository<Plant, Long> {
     
     @Transactional
     void deletePlantById(Long id);
+    
+    @Transactional
+    List<Plant> findPlantsByName(String name);
 }

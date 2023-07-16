@@ -7,6 +7,8 @@ import com.planty_app.Planty.repositories.MyPlantSampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,5 +43,15 @@ public class MyPlantSampleService {
         for (Long id: plantsToDeleteIds) {
             deletePlantSampleById(id);
         }
+    }
+    
+    public void createNewPlantSample(Utilizer user, Plant plant, String age){
+        MyPlantSample newPlantSample=new MyPlantSample()
+                .withPlant(plant)
+                .withUtilizer(user)
+                .withPlantAge(Integer.parseInt(age))
+                .withStartOfWatering(LocalDateTime.now())
+                .withDateToCompare(LocalDateTime.now());
+        myPlantSampleRepository.save(newPlantSample);
     }
 }
