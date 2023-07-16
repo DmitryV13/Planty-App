@@ -1,6 +1,12 @@
 server:
   port: 8081
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 200KB
+      max-file-size: 50MB
+      max-request-size: 50MB
   jpa:
     hibernate:
       ddl-auto: create-drop
