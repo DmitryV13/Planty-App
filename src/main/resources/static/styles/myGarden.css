@@ -459,7 +459,7 @@ form .task-item{
     align-items: center;
 }
 
-.task-plant, .task-plant-age, .task-action{
+.task-plant, .task-plant-age, .task-action, .task-details{
     margin-bottom: 10px;
 }
 

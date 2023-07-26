@@ -5,7 +5,11 @@ import com.planty_app.Planty.services.UtilizerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +35,10 @@ public class UtilizerController {
     
     @RequestMapping("/login")
     public String login() {
-        return "pages/login";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken)
+            return "pages/login";
+        return "redirect:/myGarden";
     }
     
     @GetMapping("/aboutUs")
@@ -55,19 +62,21 @@ public class UtilizerController {
         return "redirect:/";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @GetMapping("/changeAvatar")
-    public String changeAvatar(){
+    public String changeAvatar() {
         return "pages/changeAvatar";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @PostMapping("/changeCurrentAvatar")
     public String changeCurrentAvatar(Principal principal,
                                       Model model,
-                                      @RequestParam("file") MultipartFile newAvatar){
-        Utilizer currentUtilizer=utilizerService.findUtilizerByLogin(principal.getName());
+                                      @RequestParam("file") MultipartFile newAvatar) {
+        Utilizer currentUtilizer = utilizerService.findUtilizerByLogin(principal.getName());
         try {
             utilizerService.setNewAvatar(currentUtilizer, newAvatar);
-        }catch (IOException e){
+        } catch (IOException e) {
             model.addAttribute("fileError", e.getMessage());
         }
         return "redirect:/myGarden";

@@ -53,8 +53,9 @@
                                                 <div class="task-info-body popup__body">
                                                     <div class="task-info-content popup__content">
                                                         <div class="task-plant" th:text="${pending.getPlantName()}"></div>
-                                                        <div class="task-plant-age" th:text="'Plant age: ' + ${pending.getPlantAge()}"></div>
+                                                        <div class="task-plant-age" th:text="'Plant age: ' + ${pending.getFullPlantAge()}"></div>
                                                         <div class="task-action" th:text="${pending.getTaskName()} + ' at:'"></div>
+                                                        <div class="task-details" th:text="'Amount of water: ' + ${pending.getTaskDetails() + 'ml'}"></div>
                                                         <div class="task-date" th:text="${pending.getNeedToBeDoneAt().toString()}"></div>
                                                     </div>
                                                 </div>
@@ -74,8 +75,9 @@
                                             <div class="task-info-body popup__body">
                                                 <div class="task-info-content popup__content">
                                                     <div class="task-plant" th:text="${completed.getPlantName()}"></div>
-                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${completed.getPlantAge()}"></div>
+                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${completed.getFullPlantAge()}"></div>
                                                     <div class="task-action" th:text="${completed.getTaskName()} + ' at:'"></div>
+                                                    <div class="task-details" th:text="'Amount of water: ' + ${completed.getTaskDetails() + 'ml'}"></div>
                                                     <div class="task-date" th:text="${completed.getNeedToBeDoneAt().toString()}"></div>
                                                 </div>
                                             </div>
@@ -93,8 +95,9 @@
                                             <div class="task-info-body popup__body">
                                                 <div class="task-info-content popup__content">
                                                     <div class="task-plant" th:text="${undone.getPlantName()}"></div>
-                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${undone.getPlantAge()}"></div>
+                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${undone.getFullPlantAge()}"></div>
                                                     <div class="task-action" th:text="${undone.getTaskName()} + ' at:'"></div>
+                                                    <div class="task-details" th:text="'Amount of water: ' + ${undone.getTaskDetails() + 'ml'}"></div>
                                                     <div class="task-date" th:text="${undone.getNeedToBeDoneAt().toString()}"></div>
                                                 </div>
                                             </div>
@@ -142,7 +145,7 @@
                                         <div class="plants-item-property">
                                             <div class="plants-item-name">Age:</div>
                                             <div class="plants-item-value"
-                                                 th:text="${plantSample.getPlantAge() + plantSample.getCareTimeInDays() +' days'}"></div>
+                                                 th:text="${plantSample.getFullPlantAge() +' days'}"></div>
                                         </div>
                                     </div>
                                 </a>
@@ -307,8 +310,9 @@
     <!--/footer-->
 </div>
 <script src="https://kit.fontawesome.com/d8b11843d3.js" crossorigin="anonymous"></script>
-<script src="../../static/scrypts/myGarden.js"></script>
+<script src="../../static/scrypts/calendar.js"></script>
 <script src="../../static/scrypts/tabs.js"></script>
+<script src="../../static/scrypts/popup.js"></script>
 </body>
 
 </html>

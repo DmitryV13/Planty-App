@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 public class MyPlantSampleService {
     private final MyPlantSampleRepository myPlantSampleRepository;
-    int count=0;
     @Autowired
     public MyPlantSampleService(MyPlantSampleRepository myPlantSampleRepository) {
         this.myPlantSampleRepository = myPlantSampleRepository;
@@ -49,7 +48,7 @@ public class MyPlantSampleService {
         MyPlantSample newPlantSample = new MyPlantSample()
                 .withPlant(plant)
                 .withUtilizer(user)
-                .withPlantAge(Integer.parseInt(age))
+                .withInitialPlantAge(Integer.parseInt(age))
                 .withStartOfWatering(LocalDateTime.now());
         newPlantSample.setDaysBeforeNextWatering(newPlantSample.getPlant().getConditions().getWatering().getPeriodInt());
         newPlantSample.findCurrentAgeInterval();
@@ -58,8 +57,9 @@ public class MyPlantSampleService {
         Task newTask = new Task()
                 .withMyPlantSample(newPlantSample)
                 .withTaskName("Need to be watered")
+                .withTaskDetails(newPlantSample.findCurrentAmountOfWater())
                 .withPlantName(newPlantSample.getPlant().getName())
-                .withPlantAge(newPlantSample.getPlantAge()+ newPlantSample.getCareTimeInDays())
+                .withFullPlantAge(newPlantSample.getFullPlantAge())
                 .withTaskStatus(TaskStatus.PENDING)
                 .withNeedToBeDoneAt(deadlineForCurrentTask);
         
@@ -73,18 +73,18 @@ public class MyPlantSampleService {
         Task newTask = new Task()
                 .withMyPlantSample(sample)
                 .withTaskName("Need to be watered")
+                .withTaskDetails(sample.findCurrentAmountOfWater())
                 .withPlantName(sample.getPlant().getName())
-                .withPlantAge(sample.getPlantAge()+sample.getCareTimeInDays())
+                .withFullPlantAge(sample.getFullPlantAge())
                 .withTaskStatus(TaskStatus.PENDING)
                 .withNeedToBeDoneAt(deadlineForCurrentTask);
         
         sample.addPlantTask(newTask);
     }
-    int fg=0;
+    
     @Synchronized
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(initialDelay = 2000, fixedDelay = 3000)
     public void refreshDaysBeforeNextWateringForAllPlantSamples(){
-        fg++;
         List<MyPlantSample> plants=myPlantSampleRepository.findAll();
         if(plants.isEmpty())
             return;
@@ -96,7 +96,7 @@ public class MyPlantSampleService {
         }
     }
     
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(cron = "@daily")
     public void refreshCareTimeForAll(){
         List<MyPlantSample> plants=myPlantSampleRepository.findAll();
         if(plants.isEmpty())

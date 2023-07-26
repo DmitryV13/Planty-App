@@ -21,9 +21,10 @@ public class Task {
     @JoinColumn(name = "myPlantSample_id")
     private MyPlantSample myPlantSample;
     
-    private int plantAge;
+    private String fullPlantAge;
     private String plantName;
     private String  taskName;
+    private String taskDetails;
     private LocalDateTime needToBeDoneAt;
     private TaskStatus taskStatus;
     

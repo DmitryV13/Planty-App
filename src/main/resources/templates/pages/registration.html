@@ -12,22 +12,22 @@
             <div class="service-form-item">
                 <img src="../../static/icons/name.svg" class="form-icon">
                 <label for="name" class="form-label placeholder-name">Name</label>
-                <input id="name" name="name" type="text" class="form-input" tabindex="1">
+                <input minlength="8" id="name" name="name" type="text" class="form-input" tabindex="1">
             </div>
             <div class="service-form-item">
                 <img src="../../static/icons/surname.svg" class="form-icon">
                 <label for="surname" class="form-label placeholder-surname">Surname</label>
-                <input id="surname" name="surname" type="text" class="form-input" tabindex="2">
+                <input minlength="8" id="surname" name="surname" type="text" class="form-input" tabindex="2">
             </div>
             <div class="service-form-item">
                 <img src="../../static/icons/mail.svg" class="form-icon">
                 <label for="fullusername" class="form-label placeholder-fullusername">Username</label>
-                <input id="fullusername" name="login" type="text" class="form-input" tabindex="3">
+                <input minlength="8" id="fullusername" name="login" type="text" class="form-input" tabindex="3">
             </div>
             <div class="service-form-item">
                 <img src="../../static/icons/lock.svg" class="form-icon">
                 <label for="newpassword" class="form-label placeholder-newpassword">Password</label>
-                <input id="newpassword" name="newpassword" type="password" class="form-input" tabindex="4">
+                <input minlength="8" id="newpassword" name="newpassword" type="password" class="form-input" tabindex="4">
             </div>
             <div class="service__form-button">
                 <input type="submit" class="form-button" value="Create">
@@ -39,6 +39,7 @@
         </div>
     </form>
 </main>
-<script src="../../static/scrypts/login-register.js"></script>
+<script src="../../static/scrypts/placeholders.js"></script>
+<script src="../../static/scrypts/registration-validation.js"></script>
 </body>
 </html>

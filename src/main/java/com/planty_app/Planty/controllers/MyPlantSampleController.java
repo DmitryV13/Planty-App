@@ -72,6 +72,7 @@ public class MyPlantSampleController {
         return "forward:/userInfo/" + chosenUser.getId();
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @PostMapping("/addPlantToMyGarden/{plantId}")
     public String addPlantToMyGarden(@PathVariable Long plantId,
                                      @RequestParam("age") String age,
@@ -82,12 +83,14 @@ public class MyPlantSampleController {
         return "redirect:/myGarden";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @GetMapping("/deletePlantFromGarden/{plantId}")
     public String deletePlantFromGarden(@PathVariable Long plantId){
         myPlantSampleService.deletePlantSampleById(plantId);
         return "redirect:/myGarden";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @PostMapping("/updateTasks")
     public String updateTasks(@RequestParam(value = "completedTasks", required = false) List<String> tasks){
         if(tasks!=null)

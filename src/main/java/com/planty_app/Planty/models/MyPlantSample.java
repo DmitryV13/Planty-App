@@ -2,12 +2,10 @@ package com.planty_app.Planty.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 @Getter
@@ -38,7 +36,7 @@ public class MyPlantSample {
     /**
      * is stored in days
      */
-    private int plantAge;
+    private int initialPlantAge;
     private int careTimeInDays = 0;
     
     /**
@@ -50,7 +48,7 @@ public class MyPlantSample {
     public void findCurrentAgeInterval() {
         int[] aowk = this.getPlant().getConditions().getWatering().getAmountOfWaterKeyInt();
         for (int i = 1; i < aowk.length; i++) {
-            if (plantAge + careTimeInDays > aowk[i]) {
+            if (initialPlantAge + careTimeInDays > aowk[i]) {
                 i++;
             } else {
                 this.currentAgeInterval = i;
@@ -98,5 +96,14 @@ public class MyPlantSample {
                 return;
             }
         }
+    }
+    
+    public String findCurrentAmountOfWater(){
+        String amount=Integer.toString(this.getPlant().getConditions().getWatering().getAmountOfWaterValueInt()[currentAgeInterval-1]);
+        return amount;
+    }
+    
+    public String getFullPlantAge(){
+        return Integer.toString(this.initialPlantAge+this.careTimeInDays);
     }
 }

@@ -1,5 +1,5 @@
 const formElement = document.getElementById('form');
-const formInputs = document.querySelectorAll("input")
+const formInputs = document.querySelectorAll("input");
 const formTextareas=document.querySelectorAll("textarea");
 const fileNamespace = document.querySelector(".file-input-body .chosen-file");
 const fileInput = document.querySelector(".file-input-body input");
@@ -7,7 +7,7 @@ const shortError = "Is too short";
 const emptyError = "Should not be empty";
 const extensionError="Extension should be one from: jpg, jpeg, png";
 const extensions=["jpg","jpeg","png"];
-const wateringError="Data should be in form: 1,2,3,..."
+const wateringError="Data should be in form: 1,2,3,...";
 
 for (let i = 0; i < formInputs.length; i++) {
     formInputs[i].addEventListener('focusout', (e) => {

@@ -20,6 +20,7 @@ public class PlantController {
     public PlantController(PlantService plantService){
         this.plantService=plantService;
     }
+    
     @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR')")
     @PostMapping("/createNewPlant")
     public String createNewPlant(Model model,
@@ -41,6 +42,7 @@ public class PlantController {
         return "redirect:/viewAllPlants";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @GetMapping("/plantInfo/{plantId}")
     public String plantInfo(Model model,
                             @PathVariable Long plantId) {
@@ -49,6 +51,7 @@ public class PlantController {
         return "pages/plantInfo";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @GetMapping("/plantView/{plantId}")
     public String plantViewForUser(Model model,
                                    @PathVariable Long plantId) {
@@ -57,6 +60,7 @@ public class PlantController {
         return "pages/plantInfoBeforeAdd";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @PostMapping("/findPlant")
     public String findPlant(HttpServletRequest request,
                             @RequestParam("findPlant") String plantName) {
@@ -66,6 +70,7 @@ public class PlantController {
         return "redirect:/resultFind";
     }
     
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR', 'USER')")
     @GetMapping("/resultFind")
     public String resultFind(HttpServletRequest request,
                              Model model) {
