@@ -2,6 +2,7 @@ package com.planty_app.Planty.services;
 
 import com.planty_app.Planty.models.*;
 import com.planty_app.Planty.repositories.MyPlantSampleRepository;
+import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -58,7 +59,7 @@ public class MyPlantSampleService {
                 .withMyPlantSample(newPlantSample)
                 .withTaskName("Need to be watered")
                 .withPlantName(newPlantSample.getPlant().getName())
-                .withPlantAge(newPlantSample.getPlantAge())
+                .withPlantAge(newPlantSample.getPlantAge()+ newPlantSample.getCareTimeInDays())
                 .withTaskStatus(TaskStatus.PENDING)
                 .withNeedToBeDoneAt(deadlineForCurrentTask);
         
@@ -66,34 +67,40 @@ public class MyPlantSampleService {
         myPlantSampleRepository.save(newPlantSample);
 
     }
-    
+
     public void addNewTask(MyPlantSample sample){
         LocalDateTime deadlineForCurrentTask = LocalDateTime.now().plusDays(sample.getDaysBeforeNextWatering());
         Task newTask = new Task()
                 .withMyPlantSample(sample)
                 .withTaskName("Need to be watered")
                 .withPlantName(sample.getPlant().getName())
-                .withPlantAge(sample.getPlantAge())
+                .withPlantAge(sample.getPlantAge()+sample.getCareTimeInDays())
                 .withTaskStatus(TaskStatus.PENDING)
                 .withNeedToBeDoneAt(deadlineForCurrentTask);
         
         sample.addPlantTask(newTask);
     }
-    
-    @Scheduled(fixedDelay = 20000)
+    int fg=0;
+    @Synchronized
+    @Scheduled(fixedDelay = 3000)
     public void refreshDaysBeforeNextWateringForAllPlantSamples(){
+        fg++;
         List<MyPlantSample> plants=myPlantSampleRepository.findAll();
+        if(plants.isEmpty())
+            return;
         for (MyPlantSample el: plants) {
-            if(el.refreshDaysBeforeNextWatering()==1){
+            if(el.refreshDaysBeforeNextWatering()){
                 this.addNewTask(el);
             }
             myPlantSampleRepository.save(el);
         }
     }
     
-    @Scheduled(fixedDelay = 20000)
+    @Scheduled(fixedDelay = 3000)
     public void refreshCareTimeForAll(){
         List<MyPlantSample> plants=myPlantSampleRepository.findAll();
+        if(plants.isEmpty())
+            return;
         for (MyPlantSample el: plants) {
             el.refreshCareTime();
             myPlantSampleRepository.save(el);
@@ -101,15 +108,17 @@ public class MyPlantSampleService {
     }
     
     public void markTaskAsCompleted(MyPlantSample sample, Long taskId){
-        sample.taskCompleted(taskId);
-        this.addNewTask(sample);
-        myPlantSampleRepository.save(sample);
+        if(sample.taskCompleted(taskId)) {
+            this.addNewTask(sample);
+            myPlantSampleRepository.save(sample);
+        }
     }
     
     /**
      * There is possibility to mark completed task by id (second value in the array plantIdTaskId),
      * but current version is not destined to have more than 1 pending task for each plant sample
      */
+    @Synchronized
     public void tasksAnalizator(List<String> tasks){
         for (String taskEl:tasks) {
             String[] plantIdTaskId=taskEl.split("DELIMITER");

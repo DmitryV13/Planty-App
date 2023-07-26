@@ -142,7 +142,7 @@
                                         <div class="plants-item-property">
                                             <div class="plants-item-name">Age:</div>
                                             <div class="plants-item-value"
-                                                 th:text="${plantSample.getPlantAge() + ' days'}"></div>
+                                                 th:text="${plantSample.getPlantAge() + plantSample.getCareTimeInDays() +' days'}"></div>
                                         </div>
                                     </div>
                                 </a>

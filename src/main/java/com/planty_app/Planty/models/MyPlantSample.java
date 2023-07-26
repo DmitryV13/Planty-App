@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 @Getter
@@ -28,9 +29,9 @@ public class MyPlantSample {
     private Utilizer utilizer;
     
     /**
-    Represents the index in the array Amount of water key, which tell us the end
-    of current watering period
-    */
+     * Represents the index in the array Amount of water key, which tell us the end
+     * of current watering period
+     */
     private int currentAgeInterval;
     private int daysBeforeNextWatering;
     private LocalDateTime startOfWatering;
@@ -43,13 +44,13 @@ public class MyPlantSample {
     /**
      * Always current pending task will be last
      */
-    @OneToMany(mappedBy = "myPlantSample",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Task> thisPlantTasks=new ArrayList<>();
+    @OneToMany(mappedBy = "myPlantSample", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Task> thisPlantTasks = new ArrayList<>();
     
     public void findCurrentAgeInterval() {
         int[] aowk = this.getPlant().getConditions().getWatering().getAmountOfWaterKeyInt();
         for (int i = 1; i < aowk.length; i++) {
-            if (plantAge+careTimeInDays > aowk[i]) {
+            if (plantAge + careTimeInDays > aowk[i]) {
                 i++;
             } else {
                 this.currentAgeInterval = i;
@@ -59,34 +60,43 @@ public class MyPlantSample {
         this.currentAgeInterval = aowk.length - 1;
     }
     
-    public int refreshDaysBeforeNextWatering() {
-        int newTaskIsNeeded=0;
+    public boolean refreshDaysBeforeNextWatering() {
+        boolean newTaskIsNeeded = false;
         this.findCurrentAgeInterval();
-        if(this.daysBeforeNextWatering<0){
-            //BUUUGS    daysBeforeNextWatering DONT BECAME POSITIVE
-            this.thisPlantTasks.get(this.thisPlantTasks.size()-1).setTaskStatus(TaskStatus.UNDONE);
-            this.daysBeforeNextWatering=this.getPlant().getConditions().getWatering().getPeriodInt();
-            newTaskIsNeeded=1;
+        if (this.daysBeforeNextWatering < 0) {
+            findAndSetStatusUndone();
+            this.daysBeforeNextWatering = this.getPlant().getConditions().getWatering().getPeriodInt();
+            newTaskIsNeeded = true;
         }
         this.daysBeforeNextWatering--;
         return newTaskIsNeeded;
     }
     
-    public void refreshCareTime(){
+    public void refreshCareTime() {
         this.careTimeInDays++;
     }
     
-    public void addPlantTask(Task newTask){
+    public void addPlantTask(Task newTask) {
         this.thisPlantTasks.add(newTask);
     }
     
-    public void taskCompleted(Long taskId){
-        for (Task taskEl: this.thisPlantTasks) {
-            if(taskEl.getId()==taskId) {
+    public boolean taskCompleted(Long taskId) {
+        for (Task taskEl : this.thisPlantTasks) {
+            if (taskEl.getId() == taskId && taskEl.getTaskStatus() == TaskStatus.PENDING) {
                 taskEl.setTaskStatus(TaskStatus.COMPLETED);
-                break;
+                this.daysBeforeNextWatering += this.getPlant().getConditions().getWatering().getPeriodInt();
+                return true;
             }
         }
-        this.daysBeforeNextWatering+=this.getPlant().getConditions().getWatering().getPeriodInt();
+        return false;
+    }
+    
+    public void findAndSetStatusUndone() {
+        for (Task taskEl : this.thisPlantTasks) {
+            if (taskEl.getTaskStatus() == TaskStatus.PENDING) {
+                taskEl.setTaskStatus(TaskStatus.UNDONE);
+                return;
+            }
+        }
     }
 }
