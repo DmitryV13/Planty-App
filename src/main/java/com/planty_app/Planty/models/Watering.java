@@ -28,12 +28,20 @@ public class Watering {
         return Arrays.toString(amountOfWaterKey);
     }
     
+    public int[] getAmountOfWaterKeyInt(){
+        return this.amountOfWaterKey;
+    }
+    
     public String getAmountOfWaterValue(){
-        return Arrays.toString(amountOfWaterValue);
+        return Arrays.toString(this.amountOfWaterValue);
     }
     
     public String getPeriod(){
-        return Integer.toString(period.getDays());
+        return Integer.toString(this.period.getDays());
+    }
+    
+    public int getPeriodInt(){
+        return this.period.getDays();
     }
     
     public void setAmountOfWaterKey(String amountOfWaterKey){

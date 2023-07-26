@@ -4,6 +4,7 @@ import com.planty_app.Planty.models.*;
 import com.planty_app.Planty.repositories.MyPlantSampleRepository;
 import com.planty_app.Planty.repositories.PlantRepository;
 import com.planty_app.Planty.repositories.UtilizerRepository;
+import com.planty_app.Planty.services.MyPlantSampleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -19,14 +20,17 @@ public class DataInitializer implements CommandLineRunner {
     private final UtilizerRepository utilizerRepository;
     private final PlantRepository plantRepository;
     private final MyPlantSampleRepository myPlantSampleRepository;
+    private final MyPlantSampleService myPlantSampleService;
     private final PasswordEncoder passwordEncoder;
     DataInitializer(UtilizerRepository utilizerRepository,
                     PlantRepository plantRepository,
                     MyPlantSampleRepository myPlantSampleRepository,
+                    MyPlantSampleService myPlantSampleService,
                     PasswordEncoder passwordEncoder){
         this.utilizerRepository=utilizerRepository;
         this.plantRepository=plantRepository;
         this.myPlantSampleRepository=myPlantSampleRepository;
+        this.myPlantSampleService = myPlantSampleService;
         this.passwordEncoder = passwordEncoder;
     }
     
@@ -44,7 +48,7 @@ public class DataInitializer implements CommandLineRunner {
         Watering watering1=new Watering()
                 .withAmountOfWaterKey(new int[]{0,10,60,105})
                 .withAmountOfWaterValue(new int[]{70,150,70})
-                .withPeriod(Period.ofDays(5));
+                .withPeriod(Period.ofDays(2));//5
         Conditions conditions1=new Conditions()
                 .withTemperature("15-25 degrees Celsius")
                 .withHumidity("Chamomile thrives in moderate humidity. The optimal humidity level for chamomile growth is approximately 50-60%. However, the plant is able to survive in higher or lower humidity levels.")
@@ -128,16 +132,18 @@ public class DataInitializer implements CommandLineRunner {
         //MODERATOR
         
         //MY SAMPLES
-        MyPlantSample mySample1=new MyPlantSample()
-                .withPlant(plant1)
-                .withPlantAge(3)
-                .withUtilizer(simpleUser);
-        MyPlantSample mySample2= new MyPlantSample()
-                .withPlant(plant1)
-                .withPlantAge(3)
-                .withUtilizer(simpleUser);
-        myPlantSampleRepository.save(mySample1);
-        myPlantSampleRepository.save(mySample2);
+        myPlantSampleService.createNewPlantSample(simpleUser,plant1,"1");
+        myPlantSampleService.createNewPlantSample(simpleUser,plant1,"2");
+//        MyPlantSample mySample1=new MyPlantSample()
+//                .withPlant(plant1)
+//                .withPlantAge(3)
+//                .withUtilizer(simpleUser);
+//        MyPlantSample mySample2= new MyPlantSample()
+//                .withPlant(plant1)
+//                .withPlantAge(3)
+//                .withUtilizer(simpleUser);
+//        myPlantSampleRepository.save(mySample1);
+//        myPlantSampleRepository.save(mySample2);
         //MY SAMPLES
     }
     

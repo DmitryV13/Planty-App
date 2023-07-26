@@ -18,4 +18,7 @@ public interface MyPlantSampleRepository extends JpaRepository<MyPlantSample, Lo
     
     @Transactional
     void deleteMyPlantSampleById(Long id);
+    
+    @Transactional
+    Optional<MyPlantSample> findMyPlantSampleById(Long id);
 }

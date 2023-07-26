@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 @font-face {
     font-family: 'Montserrat';
     src: url('../fonts/Montserrat-Bold.eot');
@@ -114,7 +115,7 @@ h6 {
 }
 
 /*--------------------*/
-a{
+a {
     cursor: pointer;
 }
 
@@ -134,6 +135,7 @@ body.locked {
     width: 1200px;
     margin: 0 auto;
 }
+
 
 header {
     background: #f1f1f1;
@@ -216,7 +218,7 @@ header {
     visibility: hidden;
 }
 
-.header__list-user-menu{
+.header__list-user-menu {
     background: #494949;
     border-radius: 50%;
     width: 50px;
@@ -225,11 +227,11 @@ header {
     overflow: hidden;
 }
 
-.header__list-user-menu:hover{
+.header__list-user-menu:hover {
     background: #1a5fd9;
 }
 
-.header__list-user-menu-head{
+.header__list-user-menu-head {
     background: white;
     position: absolute;
     top: 20%;
@@ -239,7 +241,7 @@ header {
     border-radius: 50%;
 }
 
-.header__list-user-menu-body{
+.header__list-user-menu-body {
     background: white;
     position: absolute;
     bottom: -40%;
@@ -265,13 +267,13 @@ footer {
 
 main {
     flex: 1 0 auto;
-    padding-bottom: 30px ;
+    padding-bottom: 30px;
 }
 
 .main__container {
     display: flex;
     align-items: flex-start;
-
+    flex-wrap: wrap;
 }
 
 .greeting {
@@ -286,18 +288,20 @@ main {
 }
 
 .garden__tasks {
-    justify-self: left;
-    background: #c1e4e98a;
-    border-radius: 30px;
+    flex-basis: 25%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    font-family: 'Poppins', sans-serif;
 }
 
 .garden__tasks-body {
     padding: 15px;
+    position: relative;
 }
 
 .tasks-title {
     text-align: center;
-    font-family: 'Gill Sans';
     font-size: 25px;
     color: #494949;
     padding: 5px 20px;
@@ -317,66 +321,149 @@ main {
 
 }
 
-.task-items {
+.tasks-nav {
+    display: flex;
+    flex: 0 1 33.333%;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.tasks-tab {
+    height: 30px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.tasks-link {
+    color: #494949;
+    padding: 0 5px;
+}
+
+.tasks-link:hover {
+    color: #0095fb;
+}
+
+.tab-line {
+    position: absolute;
+    top: 30px;
+    left: 7px;
+    height: 2px;
+    width: 67px;
+    background: #00b9fb;
+    transition: all 0.3s ease-in 0s;
+}
+
+.tasks-tabs .invisible {
+    display: none;
+}
+
+.tab-body {
+
+}
+
+.tasks-list form button{
+    position:absolute;
+    background: white;
+    top: 18px;
+    right: 20px;
+    color: #494949;
+    font-size: 15px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.tasks-list form button .fa-rotate:hover{
+    rotate: 180deg;
+    transition: all 0.3s ease-in 0s;
+    color: #fbac00;
+}
+
+.task-item label{
+    padding-left: 5px;
+}
+
+.task-item {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+form .task-item{
+    margin-bottom: 14px;
+}
+
+.task-item i {
+    margin-right: 5px;
+}
+
+#tab3 .task-item .readable {
+    color: rgb(255 61 61);
+}
+
+#tab2 .task-item .readable {
+    color: rgb(62 206 147);
+}
+
+.task-item a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 15px;
+    color: #797979;
+}
+
+.task-item a:hover {
+    color: #5d5d5d;
+}
+
+.tasks-item-popup {
+
+}
+
+.task-info{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(73, 73, 73, 0.59);
+    z-index: 2;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all 0.5s ease 0s;
+}
+
+.task-info.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.task-info-body{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-info-content{
+    width: 35%;
+    background: white;
+    color: black;
+    padding: 30px;
+    border-radius: 20px;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.task-item {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 200px;
+.task-plant, .task-plant-age, .task-action{
+    margin-bottom: 10px;
 }
 
-.task-item-container {
-    display: flex;
-}
-
-.task-item-image {
-
-}
-
-.task-item-text {
-    margin-left: 7px;
-}
-
-.task-item-title {
-    font-family: Montserrat;
-    color: #2a7265;
-    font-weight: 700;
-    font-size: 17px;
-    padding-bottom: 5px;
-}
-
-.task-item-subtitle {
-    font-family: "Gill Sans";
-    font-size: 14px;
-    color: #2a7265;
-}
-
-.task-button {
-    display: flex;
-    align-items: center;
-    background: rgb(242 26 71 / 76%);
-    width: 40px;
-    height: 26px;
-    border-radius: 13px;
-}
-
-.task-completed {
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background: #f8f8f8;
-}
-
-.task-button.done {
-    justify-content: flex-end;
-    background: rgb(62 206 147);
+.task-date{
 }
 
 .properties {
@@ -437,13 +524,13 @@ main {
     justify-content: center;
 }
 
-.garden__properties-content-forscroll{
+.garden__properties-content-forscroll {
     width: 500px;
     height: 80%;
     overflow: auto;
 }
 
-.garden__properties-content-forscroll::-webkit-scrollbar{
+.garden__properties-content-forscroll::-webkit-scrollbar {
     width: 7px;
     background-color: #f8f8f8;
 }
@@ -481,13 +568,13 @@ main {
     margin-bottom: 10px;
 }
 
-.delete-plant-link{
+.delete-plant-link {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.delete-plant{
+.delete-plant {
     font-family: Montserrat;
     font-size: 20px;
     color: white;
@@ -499,7 +586,7 @@ main {
     transition: all 0.8s ease 0s;
 }
 
-.delete-plant:hover{
+.delete-plant:hover {
     padding: 7px 27px;
     transition: all 0.6s ease 0s;
     cursor: pointer;
@@ -510,7 +597,7 @@ main {
     border-radius: 7px;
 }
 
-.properties-item .delete-plant-link{
+.properties-item .delete-plant-link {
     background: #f8f8f8;
 }
 
@@ -529,12 +616,11 @@ main {
     font-weight: 700;
     font-size: 15px;
     line-height: 1.2;
-    padding-left:10px;
+    padding-left: 10px;
 }
 
 .garden {
-    justify-self: center;
-    width: 700px;
+    flex-basis: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -623,7 +709,7 @@ main {
     margin-left: 30px;
 }
 
-.user-info{
+.user-info {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -638,19 +724,19 @@ main {
     transition: all 0.5s ease 0s;
 }
 
-.user-info.open{
+.user-info.open {
     opacity: 1;
     visibility: visible;
 }
 
-.user-info-body{
+.user-info-body {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.user-info-content{
+.user-info-content {
     width: 25%;
     background: white;
     color: black;
@@ -663,12 +749,12 @@ main {
     position: relative;
 }
 
-.user-icon img{
+.user-icon img {
     width: 110px;
     border-radius: 50%;
 }
 
-.user-icon{
+.user-icon {
     border: 2px solid white;
     background: #1a5fd9;
     border-radius: 50%;
@@ -679,7 +765,7 @@ main {
     overflow: hidden;
 }
 
-.user-info-background::before{
+.user-info-background::before {
     content: '';
     background: #9a9a9a;
     position: absolute;
@@ -692,7 +778,7 @@ main {
     border-top-right-radius: 20px;
 }
 
-.user-icon-head{
+.user-icon-head {
     background: white;
     position: absolute;
     top: 20%;
@@ -702,7 +788,7 @@ main {
     border-radius: 50%;
 }
 
-.user-icon-body{
+.user-icon-body {
     background: white;
     position: absolute;
     bottom: -40%;
@@ -712,18 +798,18 @@ main {
     border-radius: 45%;
 }
 
-.user-con image{
+.user-con image {
     width: 40px;
 }
 
-.user-name{
+.user-name {
     margin-top: 22px;
     font-family: Montserrat;
     font-size: 20px;
     color: #383838;
 }
 
-.user-login{
+.user-login {
     margin-top: 6px;
     font-family: Montserrat;
     font-size: 13px;
@@ -731,23 +817,23 @@ main {
     margin-bottom: 10px;
 }
 
-.add-tools{
+.add-tools {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.user-info-link{
+.user-info-link {
     margin-top: 17px;
     display: flex;
     align-items: center;
 }
 
-.sign-out-icon{
+.sign-out-icon {
     width: 20px;
 }
 
-.sign-out-button{
+.sign-out-button {
     background: white;
     padding-left: 7px;
     font-family: Montserrat;
@@ -757,16 +843,16 @@ main {
     cursor: pointer;
 }
 
-.sign-out-button:hover{
+.sign-out-button:hover {
     color: #8b8b8b;
     transition: all 0.2s ease 0s;
 }
 
-.plants-find{
+.plants-find {
     position: relative;
 }
 
-.find-input{
+.find-input {
     width: 100%;
     height: 40px;
     padding-left: 15px;
@@ -777,16 +863,16 @@ main {
     color: #494949;
 }
 
-.find-input::placeholder{
+.find-input::placeholder {
     font-family: Montserrat;
     font-size: 13px;
     color: #c5c5c5;
 }
 
-.find-button{
+.find-button {
     position: absolute;
-    top: calc((40px - 30px)/2);
-    right: calc((40px - 30px)/2);
+    top: calc((40px - 30px) / 2);
+    right: calc((40px - 30px) / 2);
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -794,7 +880,7 @@ main {
     transition: all 0.4s ease 0s;
 }
 
-.find-button:hover{
+.find-button:hover {
     top: 0;
     right: 0;
     width: 40px;
@@ -802,63 +888,73 @@ main {
     transition: all 0.4s ease 0s;
 }
 
-.find-button-icon{
+.find-button-icon {
     width: 30px;
 }
 
-.calendar-wrapper{
-    width: 350px;
+.calendar-wrapper {
+    flex-basis: 25%;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
     font-family: 'Poppins', sans-serif;
 }
-.calendar-header{
+
+.calendar-header {
     display: flex;
     align-items: center;
     padding: 25px 30px 10px;
     justify-content: center;
 }
 
-.current-date{
+.current-date {
     font-size: 20px;
     font-weight: 500;
     text-align: center;
 }
-.calendar{
+
+.calendar {
     padding: 20px;
 }
-.calendar ul{
+
+.calendar ul {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
     text-align: center;
 }
-.calendar .days{
+
+.calendar .days {
     margin-bottom: 20px;
 }
-.calendar li{
+
+.calendar li {
     color: #333;
     width: calc(100% / 7);
     font-size: 1.07rem;
 }
-.calendar .weeks li{
+
+.calendar .weeks li {
     font-weight: 500;
     cursor: default;
 }
-.calendar .days li{
+
+.calendar .days li {
     z-index: 1;
     cursor: pointer;
     position: relative;
     margin-top: 30px;
 }
-.days li.inactive{
+
+.days li.inactive {
     color: #aaa;
 }
-.days li.active{
+
+.days li.active {
     color: #333;
 }
-.days li::before{
+
+.days li::before {
     position: absolute;
     content: "";
     left: 50%;
@@ -869,9 +965,13 @@ main {
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
-.days li.active::before{
+
+.days li.active::before {
     border: solid 2px #0095fb;
 }
-.days li:not(.active):hover::before{
+
+.days li:not(.active):hover::before {
     background: #f2f2f2;
+    height: 30px;
+    width: 30px;
 }

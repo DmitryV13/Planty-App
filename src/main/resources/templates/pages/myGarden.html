@@ -34,42 +34,75 @@
                     <div class="garden__tasks-body">
                         <div class="tasks-title title">Tasks</div>
                         <div class="task-icon"></div>
-
-                        <div class="task-items">
-
-                            <!--item for js-->
-                            <div class="task-item">
-                                <div class="task-item-container">
-                                    <div class="task-item-image">
-                                        <img src="../../static/icons/water.png">
-                                    </div>
-                                    <div class="task-item-text">
-                                        <div class="task-item-title">Полить</div>
-                                        <div class="task-item-subtitle">ромашка</div>
-                                    </div>
-                                </div>
-                                <div class="task-button">
-                                    <div class="task-completed"></div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="task-item">
-                                <div class="task-item-container">
-                                    <div class="task-item-image">
-                                        <img src="../../static/icons/fertilizer.png">
-                                    </div>
-                                    <div class="task-item-text">
-                                        <div class="task-item-title">Полить</div>
-                                        <div class="task-item-subtitle">ромашка</div>
-                                    </div>
-                                </div>
-                                <div class="task-button">
-                                    <div class="task-completed"></div>
-                                </div>
-                            </div>
-
+                        <div class="tasks-nav">
+                            <div class="tasks-tab"><a class="tasks-link" href="#tab1">Pending</a></div>
+                            <div class="tasks-tab"><a class="tasks-link" href="#tab2">Completed</a></div>
+                            <div class="tasks-tab"><a class="tasks-link" href="#tab3">Undone</a></div>
+                            <div class="tab-line"></div>
                         </div>
 
+                        <div class="tasks-tabs">
+                            <div id="tab1" class="tab-body visible">
+                                <div class="tasks-list">
+                                    <form method="post" th:action="@{/updateTasks}">
+                                        <div th:each="pending : ${pendingTasks}" class="task-item">
+                                            <input id="checkbox1" name="completedTasks" th:value="${pending.getMyPlantSample().getId() + 'DELIMITER' + pending.getId()}" type="checkbox">
+                                            <label th:text="${pending.getTaskName()}" for="checkbox1"></label>
+                                            <a class="tasks-item-popup popup-link" th:href="@{'task-info' + ${pending.getId()}}"><i class="fa-solid fa-ellipsis"></i></a>
+                                            <div th:id="'task-info' + ${pending.getId()}" class="task-info popup">
+                                                <div class="task-info-body popup__body">
+                                                    <div class="task-info-content popup__content">
+                                                        <div class="task-plant" th:text="${pending.getPlantName()}"></div>
+                                                        <div class="task-plant-age" th:text="'Plant age: ' + ${pending.getPlantAge()}"></div>
+                                                        <div class="task-action" th:text="${pending.getTaskName()} + ' at:'"></div>
+                                                        <div class="task-date" th:text="${pending.getNeedToBeDoneAt().toString()}"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit"><i class="fa-solid fa-rotate"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="tab2" class="tab-body invisible">
+                                <div class="tasks-list">
+                                    <div th:each="completed : ${completedTasks}"  class="task-item">
+                                        <i class="fa-solid fa-circle-check readable"></i>
+                                        <span th:text="${completed.getTaskName()}"></span>
+                                        <a class="tasks-item-popup popup-link" th:href="@{'task-info' + ${completed.getId()}}"><i class="fa-solid fa-ellipsis"></i></a>
+                                        <div th:id="'task-info' + ${completed.getId()}" class="task-info popup">
+                                            <div class="task-info-body popup__body">
+                                                <div class="task-info-content popup__content">
+                                                    <div class="task-plant" th:text="${completed.getPlantName()}"></div>
+                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${completed.getPlantAge()}"></div>
+                                                    <div class="task-action" th:text="${completed.getTaskName()} + ' at:'"></div>
+                                                    <div class="task-date" th:text="${completed.getNeedToBeDoneAt().toString()}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab3" class="tab-body invisible">
+                                <div class="tasks-list">
+                                    <div th:each="undone : ${undoneTasks}" class="task-item">
+                                        <i class="fa-solid fa-circle-xmark readable"></i>
+                                        <span th:text="${undone.getTaskName()}"></span>
+                                        <a class="tasks-item-popup popup-link" th:href="@{'task-info' + ${undone.getId()}}"><i class="fa-solid fa-ellipsis"></i></a>
+                                        <div th:id="'task-info' + ${undone.getId()}" class="task-info popup">
+                                            <div class="task-info-body popup__body">
+                                                <div class="task-info-content popup__content">
+                                                    <div class="task-plant" th:text="${undone.getPlantName()}"></div>
+                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${undone.getPlantAge()}"></div>
+                                                    <div class="task-action" th:text="${undone.getTaskName()} + ' at:'"></div>
+                                                    <div class="task-date" th:text="${undone.getNeedToBeDoneAt().toString()}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--                tasks-->
@@ -114,8 +147,8 @@
                                     </div>
                                 </a>
                                 <div th:id="'properties' + ${plantSample.getId()}" class="garden__properties popup">
-                                    <div class="garden__properties-body popup-body">
-                                        <div class="garden__properties-content popup content">
+                                    <div class="garden__properties-body popup__body">
+                                        <div class="garden__properties-content popup__content">
                                             <div class="garden__properties-content-forscroll">
                                                 <div class="properties-title title">Properties</div>
                                                 <div class="properties-icon"></div>
@@ -203,7 +236,8 @@
                                                     </div>
                                                     <div class="properties-item">
                                                         <div class="delete-plant-link">
-                                                            <a th:href="@{/deletePlantFromGarden/{plantId}(plantId=${plantSample.getId()})}" class="delete-plant">Delete</a>
+                                                            <a th:href="@{/deletePlantFromGarden/{plantId}(plantId=${plantSample.getId()})}"
+                                                               class="delete-plant">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,6 +308,7 @@
 </div>
 <script src="https://kit.fontawesome.com/d8b11843d3.js" crossorigin="anonymous"></script>
 <script src="../../static/scrypts/myGarden.js"></script>
+<script src="../../static/scrypts/tabs.js"></script>
 </body>
 
 </html>

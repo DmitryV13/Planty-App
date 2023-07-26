@@ -39,8 +39,4 @@ public class Utilizer {
     public void setBase64Avatar(byte[] image){
         this.base64Avatar= Base64.getEncoder().encodeToString(image);
     }
-    
-//    public String getBaseAvatar(){
-//
-//    }
 }

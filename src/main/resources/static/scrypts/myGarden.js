@@ -113,24 +113,6 @@ function bodyUnlock() {
     }
 })();
 
-//TASKS COMPLETED
-const tasks = document.querySelectorAll(".task-button");
-
-for (let i = 0; i < tasks.length; i++) {
-    const el = tasks[i];
-    el.addEventListener("click", function (e) {
-        taskCompleted(el);
-    })
-}
-
-function taskCompleted(task) {
-    task.classList.add("done");
-}
-
-function taskUndone(task) {
-    task.classList.remove("done");
-}
-
 //CALENDAR
 const daysTag = document.querySelector(".days"),
     currentDate = document.querySelector(".current-date"),
