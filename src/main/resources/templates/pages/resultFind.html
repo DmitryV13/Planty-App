@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/resultFind.css">
+    <title>Planty</title>
+</head>
+<body>
+<div class="wrapper">
+    <!--header-->
+    <header th:insert="~{pages/components/header::header}">
+    </header>
+    <!--header-->
+
+    <!--main-->
+    <main class="main">
+        <div class="container">
+            <div class="main__container">
+                <div class="list-title">All current plants</div>
+                <div class="plants-list">
+                    <div th:each="plant : ${result}" class="plants-item">
+                        <div class="plants-photo">
+                            <img th:src="@{'data:image/jpeg;base64,' + ${plant.getBase64Photo()}}">
+                        </div>
+                        <div class="plants-info">
+                            <div class="list-info-item">
+                                <div class="list-item-property">name:</div>
+                                <div th:text="${plant.getName()}" class="list-item-value"></div>
+                            </div>
+                            <div class="list-info-item">
+                                <div class="list-item-property">family:</div>
+                                <div th:text="${plant.getHistory().getFamily()}" class="list-item-value"></div>
+                            </div>
+                        </div>
+                        <div class="inspect-link">
+                            <a th:href="@{/plantView/{plantId}(plantId=${plant.getId()})}" class="inspect">More info</a>
+                            <a href="#add" class="add popup-link">Add</a>
+                        </div>
+                        <div id="add" class="add-popup popup">
+                            <div class="add-body popup__body">
+                                <form method="post" th:action="@{/addPlantToMyGarden/{plantId}(plantId=${plant.getId()})}" class="add-content popup__content">
+                                    <div class="add-title">Add plant to my garden</div>
+                                    <div class="tools-item">
+                                        <label for="age" class="tools-label">Age in days:</label>
+                                        <input required name="age" type="number" id="age" class="tools-input"
+                                               tabindex="1">
+                                    </div>
+                                    <div class="add-link">
+                                        <button type="submit"
+                                           class="add-form-link popup-link">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <!--main-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--footer-->
+</div>
+<script src="../../static/scrypts/popup.js"></script>
+</body>
+</html>

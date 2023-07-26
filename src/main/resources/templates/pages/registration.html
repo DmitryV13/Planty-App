@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../../static/styles/login-register.css">
+</head>
+<body>
+<main>
+    <form action="#" th:action="@{/addUser}" method="post" class="service__body">
+        <div class="service__content">
+            <div class="service__title">Registration</div>
+            <div class="service-form-item">
+                <img src="../../static/icons/name.svg" class="form-icon">
+                <label for="name" class="form-label placeholder-name">Name</label>
+                <input minlength="8" id="name" name="name" type="text" class="form-input" tabindex="1">
+            </div>
+            <div class="service-form-item">
+                <img src="../../static/icons/surname.svg" class="form-icon">
+                <label for="surname" class="form-label placeholder-surname">Surname</label>
+                <input minlength="8" id="surname" name="surname" type="text" class="form-input" tabindex="2">
+            </div>
+            <div class="service-form-item">
+                <img src="../../static/icons/mail.svg" class="form-icon">
+                <label for="fullusername" class="form-label placeholder-fullusername">Username</label>
+                <input minlength="8" id="fullusername" name="login" type="text" class="form-input" tabindex="3">
+            </div>
+            <div class="service-form-item">
+                <img src="../../static/icons/lock.svg" class="form-icon">
+                <label for="newpassword" class="form-label placeholder-newpassword">Password</label>
+                <input minlength="8" id="newpassword" name="newpassword" type="password" class="form-input" tabindex="4">
+            </div>
+            <div class="service__form-button">
+                <input type="submit" class="form-button" value="Create">
+            </div>
+            <div class="service__form-link">
+                <a th:href="@{/login}" class="form-link">Back</a>
+            </div>
+            <div class="service-form-error"></div><!-- error-->
+        </div>
+    </form>
+</main>
+<script src="../../static/scrypts/placeholders.js"></script>
+<script src="../../static/scrypts/registration-validation.js"></script>
+</body>
+</html>

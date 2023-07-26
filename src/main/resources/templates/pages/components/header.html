@@ -1,0 +1,59 @@
+<div th:fragment="header" class="container">
+    <div class="header__container">
+        <div class="header__logo">
+            Planty
+        </div>
+        <div class="menu">
+            <div class="menu__icon">
+                <span></span>
+            </div>
+            <nav class="header__menu">
+                <ul class="header__list">
+                    <li class="header__list-item">
+                        <a th:href="@{/}" class="">HOME</a></li>
+                    <li class="header__list-item">
+                        <a th:href="@{/myGarden}" class="">MY GARDEN</a></li>
+                    <li class="header__list-item">
+                        <a th:href="@{/aboutUs}">ABOUT US</a></li>
+                    <li class="header__list-item">
+                        <a th:href="@{/login}" class="">SIGN IN</a></li>
+                    <li class="header__list-item">
+                        <a href="" class="">CONTACTS</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="home-header" class="container">
+    <div class="header__container">
+        <div class="header__logo">
+            Planty
+        </div>
+        <div class="menu">
+            <div class="menu__icon">
+                <span></span>
+            </div>
+            <nav class="header__menu">
+                <ul class="header__list">
+                    <li class="header__list-item">
+                        <a th:href="@{/}" class="">HOME</a></li>
+                    <li class="header__list-item">
+                        <a th:href="@{/myGarden}" class="popup-link">MY GARDEN</a></li>
+                    <li class="header__list-item">
+                        <a th:href="@{/aboutUs}">ABOUT US</a></li>
+                    <li class="header__list-item">
+                        <a th:href="@{/login}" class="">SIGN IN</a></li>
+                    <li class="header__list-item">
+                        <a href="" class="">CONTACTS</a></li>
+                    <li class="header__list-item">
+                        <a href="#user-info" class="popup-link header__list-user-menu">
+                            <div class="header__list-user-menu-head"></div>
+                            <div class="header__list-user-menu-body"></div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1300">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/changeAvatar.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <title>Planty</title>
+</head>
+<body>
+
+<div class="wrapper">
+    <!--header-->
+    <div id="lock"></div>
+    <header th:insert="~{pages/components/header::home-header}">
+    </header>
+    <!--/header-->
+
+    <!--body-->
+    <main>
+        <div class="container">
+            <form enctype="multipart/form-data" id="form" method="post"
+                  th:action="@{/changeCurrentAvatar}" class="tools-form-body">
+                <div class="tools-form-title">Change current avatar</div>
+                <div class="tools-item">
+                    <div class="file-input-body">
+                        <label for="avatar" class="file-label"><i class="fa-solid fa-upload"></i>Add file</label>
+                        <input multiple="false" required name="file" type="file" accept=".jpg,.jpeg,.png" id="avatar"
+                               tabindex="1">
+                        <div class="chosen-file"></div>
+                    </div>
+                    <div class="extension-error"></div>
+                </div>
+              <button type="submit" class="tools-button">Change</button>
+            </form>
+        </div>
+        <!--        user-info-box-->
+    </main>
+    <!--/body-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--/footer-->
+</div>
+<script src="https://kit.fontawesome.com/d8b11843d3.js" crossorigin="anonymous"></script>
+<script src="../../static/scrypts/form-validation.js"></script>
+</body>
+
+</html>

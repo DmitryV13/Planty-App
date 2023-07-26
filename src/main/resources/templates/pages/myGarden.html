@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1300">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/myGarden.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <title>Planty</title>
+</head>
+<body>
+
+<div class="wrapper">
+    <!--header-->
+    <div id="lock"></div>
+    <header th:insert="~{pages/components/header::home-header}">
+    </header>
+    <!--/header-->
+
+    <!--body-->
+    <main>
+        <div class="container">
+            <div th:text="'Welcome ' + ${utilizer.getName()} + ' ' + ${utilizer.getSurname()} +'!'"
+                 class="greeting"></div>
+            <div class="main__container">
+
+                <!--                tasks-->
+                <div class="garden__tasks">
+                    <div class="garden__tasks-body">
+                        <div class="tasks-title title">Tasks</div>
+                        <div class="task-icon"></div>
+                        <div class="tasks-nav">
+                            <div class="tasks-tab"><a class="tasks-link" href="#tab1">Pending</a></div>
+                            <div class="tasks-tab"><a class="tasks-link" href="#tab2">Completed</a></div>
+                            <div class="tasks-tab"><a class="tasks-link" href="#tab3">Undone</a></div>
+                            <div class="tab-line"></div>
+                        </div>
+
+                        <div class="tasks-tabs">
+                            <div id="tab1" class="tab-body visible">
+                                <div class="tasks-list">
+                                    <form method="post" th:action="@{/updateTasks}">
+                                        <div th:each="pending : ${pendingTasks}" class="task-item">
+                                            <input id="checkbox1" name="completedTasks" th:value="${pending.getMyPlantSample().getId() + 'DELIMITER' + pending.getId()}" type="checkbox">
+                                            <label th:text="${pending.getTaskName()}" for="checkbox1"></label>
+                                            <a class="tasks-item-popup popup-link" th:href="@{'task-info' + ${pending.getId()}}"><i class="fa-solid fa-ellipsis"></i></a>
+                                            <div th:id="'task-info' + ${pending.getId()}" class="task-info popup">
+                                                <div class="task-info-body popup__body">
+                                                    <div class="task-info-content popup__content">
+                                                        <div class="task-plant" th:text="${pending.getPlantName()}"></div>
+                                                        <div class="task-plant-age" th:text="'Plant age: ' + ${pending.getFullPlantAge()}"></div>
+                                                        <div class="task-action" th:text="${pending.getTaskName()} + ' at:'"></div>
+                                                        <div class="task-details" th:text="'Amount of water: ' + ${pending.getTaskDetails() + 'ml'}"></div>
+                                                        <div class="task-date" th:text="${pending.getNeedToBeDoneAt().toString()}"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit"><i class="fa-solid fa-rotate"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="tab2" class="tab-body invisible">
+                                <div class="tasks-list">
+                                    <div th:each="completed : ${completedTasks}"  class="task-item">
+                                        <i class="fa-solid fa-circle-check readable"></i>
+                                        <span th:text="${completed.getTaskName()}"></span>
+                                        <a class="tasks-item-popup popup-link" th:href="@{'task-info' + ${completed.getId()}}"><i class="fa-solid fa-ellipsis"></i></a>
+                                        <div th:id="'task-info' + ${completed.getId()}" class="task-info popup">
+                                            <div class="task-info-body popup__body">
+                                                <div class="task-info-content popup__content">
+                                                    <div class="task-plant" th:text="${completed.getPlantName()}"></div>
+                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${completed.getFullPlantAge()}"></div>
+                                                    <div class="task-action" th:text="${completed.getTaskName()} + ' at:'"></div>
+                                                    <div class="task-details" th:text="'Amount of water: ' + ${completed.getTaskDetails() + 'ml'}"></div>
+                                                    <div class="task-date" th:text="${completed.getNeedToBeDoneAt().toString()}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab3" class="tab-body invisible">
+                                <div class="tasks-list">
+                                    <div th:each="undone : ${undoneTasks}" class="task-item">
+                                        <i class="fa-solid fa-circle-xmark readable"></i>
+                                        <span th:text="${undone.getTaskName()}"></span>
+                                        <a class="tasks-item-popup popup-link" th:href="@{'task-info' + ${undone.getId()}}"><i class="fa-solid fa-ellipsis"></i></a>
+                                        <div th:id="'task-info' + ${undone.getId()}" class="task-info popup">
+                                            <div class="task-info-body popup__body">
+                                                <div class="task-info-content popup__content">
+                                                    <div class="task-plant" th:text="${undone.getPlantName()}"></div>
+                                                    <div class="task-plant-age" th:text="'Plant age: ' + ${undone.getFullPlantAge()}"></div>
+                                                    <div class="task-action" th:text="${undone.getTaskName()} + ' at:'"></div>
+                                                    <div class="task-details" th:text="'Amount of water: ' + ${undone.getTaskDetails() + 'ml'}"></div>
+                                                    <div class="task-date" th:text="${undone.getNeedToBeDoneAt().toString()}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                tasks-->
+
+                <!--                garden-->
+                <div class="garden">
+                    <div class="garden-body">
+                        <div class="garden-title">
+                            <div class="garden-title-icon"><i class="fa-solid fa-sun"></i></div>
+                            <div class="garden-title-title"> My Garden</div>
+                            <div class="garden-title-icon"><i class="fa-solid fa-seedling"></i></div>
+                        </div>
+                        <div class="garden-plants">
+
+                            <div class="plants-find">
+                                <form method="post" th:action="@{/findPlant}">
+                                    <input class="find-input" type="text" name="findPlant"
+                                           placeholder="Search new plants">
+                                    <button type="submit" class="find-button">
+                                        <img src="../../static/icons/find.png" class="find-button-icon">
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!--item for js-->
+                            <div th:each="plantSample : ${plantSamples}" class="">
+                                <a th:href="@{'properties' + ${plantSample.getId()}}" class="plants-item popup-link">
+                                    <div class="plants-item-photo"><img
+                                            th:src="@{'data:image/jpeg;base64,' + ${plantSample.getPlant().getBase64Photo()}}">
+                                    </div>
+                                    <div class="plants-item-text">
+                                        <div class="plants-item-property">
+                                            <div class="plants-item-name">Name:</div>
+                                            <div class="plants-item-value"
+                                                 th:text="${plantSample.getPlant().getName()}"></div>
+                                        </div>
+                                        <div class="plants-item-property">
+                                            <div class="plants-item-name">Age:</div>
+                                            <div class="plants-item-value"
+                                                 th:text="${plantSample.getFullPlantAge() +' days'}"></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div th:id="'properties' + ${plantSample.getId()}" class="garden__properties popup">
+                                    <div class="garden__properties-body popup__body">
+                                        <div class="garden__properties-content popup__content">
+                                            <div class="garden__properties-content-forscroll">
+                                                <div class="properties-title title">Properties</div>
+                                                <div class="properties-icon"></div>
+
+                                                <div class="properties-items">
+
+                                                    <!--item for js-->
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Name:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getName()}"></div>
+                                                    </div>
+                                                    <!---->
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Species:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getHistory().getSpecies()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Family:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getHistory().getFamily()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Appearance description:
+                                                        </div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getDescription().getExternal()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Fragmentation:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getDescription().getFragmentation()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Protection status:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getDescription().getProtectionStatus().getStatus()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Temperature:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getTemperature()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Humidity:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getHumidity()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Lighting:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getLighting()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Soil:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getSoil()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Fertilizer:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getFertilizer()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Transplantation:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getTransplantation()}"></div>
+                                                    </div>
+
+                                                    <div class="properties-item">
+                                                        <div class="properties-item-property">Threats:</div>
+                                                        <div class="properties-item-value"
+                                                             th:text="${plantSample.getPlant().getConditions().getThreats()}"></div>
+                                                    </div>
+                                                    <div class="properties-item">
+                                                        <div class="delete-plant-link">
+                                                            <a th:href="@{/deletePlantFromGarden/{plantId}(plantId=${plantSample.getId()})}"
+                                                               class="delete-plant">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                garden-->
+
+                <!--calendar-->
+                <div class="calendar-wrapper">
+                    <div class="calendar-header">
+                        <p class="current-date"></p>
+                    </div>
+                    <div class="calendar">
+                        <ul class="weeks">
+                            <li>Su</li>
+                            <li>Mo</li>
+                            <li>Tu</li>
+                            <li>We</li>
+                            <li>Th</li>
+                            <li>Fr</li>
+                            <li>Sa</li>
+                        </ul>
+                        <ul class="days"></ul>
+                    </div>
+                </div>
+                <!--calendar-->
+
+            </div>
+        </div>
+
+        <!--        user-info-box-->
+        <div id="user-info" class="user-info popup">
+            <div class="user-info-body popup__body">
+                <div class="user-info-content popup__content">
+                    <div class="user-info-background"></div>
+                    <div th:replace="${utilizer.getBase64Avatar()==null} ? ~{pages/components/icons::userDefault} : ~{pages/components/icons::userAvatar}"></div>
+                    <div th:text="${utilizer.getName()} + ' ' + ${utilizer.getSurname()}" class="user-name"></div>
+                    <div th:text="'@'+${utilizer.getLogin()}" class="user-login sign-out-item"></div>
+                    <div class="user-info-link">
+                        <img class="sign-out-icon" src="../../../static/icons/tool1.png">
+                        <a th:href="@{/changeAvatar}" class="sign-out-button">Change avatar</a>
+                    </div>
+                    <div th:replace="${utilizer.getRole().toString().equals('ADMIN')} ? ~{pages/components/toolbars::adminToolbar} : ~{}"></div>
+                    <div th:replace="${utilizer.getRole().toString().equals('MODERATOR')} ? ~{pages/components/toolbars::moderatorToolbar} : ~{}"></div>
+                    <div class="user-info-link">
+                        <img class="sign-out-icon" src="../../static/icons/sign-out.png">
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" class="sign-out-button" value="Sign out">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        user-info-box-->
+    </main>
+    <!--/body-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--/footer-->
+</div>
+<script src="https://kit.fontawesome.com/d8b11843d3.js" crossorigin="anonymous"></script>
+<script src="../../static/scrypts/calendar.js"></script>
+<script src="../../static/scrypts/tabs.js"></script>
+<script src="../../static/scrypts/popup.js"></script>
+</body>
+
+</html>

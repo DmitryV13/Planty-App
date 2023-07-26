@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/viewAllUsers.css">
+    <title>Planty</title>
+</head>
+<body>
+<div class="wrapper">
+    <!--header-->
+    <header th:insert="~{pages/components/header::header}">
+    </header>
+    <!--header-->
+
+    <!--main-->
+    <main class="main">
+        <div class="container">
+            <div class="main__container">
+                <div class="list-title">All current users</div>
+                <div class="users-list">
+                    <div th:each="user : ${users}" class="user-item">
+                        <div class="user-icon">
+                            <img th:src="@{'data:image/jpeg;base64,' + ${user.getBase64Avatar()}}">
+<!--                            <div class="user-icon-head"></div>-->
+<!--                            <div class="user-icon-body"></div>-->
+                        </div>
+                        <div class="user-info">
+                            <div class="info-item">
+                                <div class="item-property">user:</div>
+                                <div th:text="${user.getName() + ' ' + user.getSurname()}" class="item-value"></div>
+                            </div>
+                            <div class="info-item">
+                                <div class="item-property">login:</div>
+                                <div th:text="${user.getLogin()}" class="item-value"></div>
+                            </div>
+                        </div>
+                        <div class="inspect-link">
+                            <a th:href="@{/userInfo/{userId}(userId=${user.getId()})}" class="inspect">Inspect</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--main-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--footer-->
+</div>
+
+</body>
+</html>

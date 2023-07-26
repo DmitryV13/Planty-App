@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/userInfo.css">
+    <title>Planty</title>
+</head>
+<body>
+<div class="wrapper">
+    <!--header-->
+    <header th:insert="~{pages/components/header::header}">
+    </header>
+    <!--header-->
+
+    <!--main-->
+    <main class="main">
+        <div class="container">
+            <div th:object="${user}" class="main__container">
+                <div class="list-title">User</div>
+                <div class="user-info-body">
+                    <div class="user-icon">
+                        <img th:src="@{'data:image/jpeg;base64,' + ${user.getBase64Avatar()}}">
+<!--                        <div class="user-icon-head"></div>-->
+<!--                        <div class="user-icon-body"></div>-->
+                    </div>
+                    <div class="user-info">
+                        <div class="info-item">
+                            <div class="item-property">name:</div>
+                            <div th:text="*{getName()}" class="item-value">Simple user</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">surname:</div>
+                            <div th:text="*{getSurname()}" class="item-value">user</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">status:</div>
+                            <div th:text="*{getRole().toString()}" class="item-value">Moderator</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">login:</div>
+                            <div th:text="*{getLogin()}" class="item-value">login</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">password:</div>
+                            <div th:text="*{getCredentials().getPassword()}" class="item-value password">password</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="item-property">registration date:</div>
+                            <div class="item-value">12.09.2022</div>
+                        </div>
+                    </div>
+                    <div th:if="*{!getRole().toString().equals('ADMIN')}" class="delete-user-link">
+                        <a th:href="@{/deleteUser/{userId}(userId=*{getId()})}" class="delete-user">Delete</a>
+                    </div>
+                    <div class="viewAll-link">
+                        <a th:href="@{/viewAllUsers}" class="viewAll">View all users</a>
+                    </div>
+                </div>
+                <div class="list-title">User's plants</div>
+                <div class="plants-list">
+                    <div th:each="plant : *{getMyPlantSamples()}" class="plants-item">
+                        <div class="plants-photo">
+                            <img th:src="@{'data:image/jpeg;base64,' + ${plant.getPlant().getBase64Photo()}}">
+                        </div>
+                        <div class="plants-info">
+                            <div class="list-info-item">
+                                <div class="list-item-property">name:</div>
+                                <div th:text="${plant.getPlant().getName()}" class="list-item-value"></div>
+                            </div>
+                            <div class="list-info-item">
+                                <div class="list-item-property">family:</div>
+                                <div th:text="${plant.getPlant().getHistory().getFamily()}"
+                                     class="list-item-value"></div>
+                            </div>
+                        </div>
+                        <div class="delete-plant-link">
+                            <a th:href="@{/deletePlantSample/{plantId}(plantId=${plant.getId()})}" class="delete-plant">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--main-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--footer-->
+</div>
+
+</body>
+</html>

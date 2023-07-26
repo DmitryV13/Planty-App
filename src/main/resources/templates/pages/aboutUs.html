@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!--    <link>//icon-->
+    <link type="text/css" rel="stylesheet" href="../../static/styles/aboutUs.css">
+    <title>Planty</title>
+</head>
+
+<body>
+<div class="wrapper">
+    <!--header-->
+    <div id="lock"></div>
+    <header th:insert="~{pages/components/header::header}">
+    </header>
+    <!--/header-->
+
+    <!--body-->
+    <main>
+        <div class="main__body">
+            <div class="main-preview">
+                <div class="main-title">About PLANTY</div>
+                <div class="main-text">Welcome to our web application for caring for houseplants! We are delighted to
+                    welcome you and help you create a green paradise in your home. Caring for houseplants can be a
+                    simple and enjoyable task, especially with our web application. Here you will find information on
+                    proper watering, lighting, fertilizing, and much more.
+                </div>
+            </div>
+            <div class="main-company-info">
+                <div class="company-info-item">
+                    <div class="info-item-title">5+</div>
+                    <div class="info-item-text">years of experience and improvement</div>
+                </div>
+                <div class="company-info-item">
+                    <div class="info-item-title">3</div>
+                    <div class="info-item-text">top-level specialists constantly developing the project</div>
+                </div>
+                <div class="company-info-item">
+                    <div class="info-item-title">100+</div>
+                    <div class="info-item-text">plants in the databases</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--/body-->
+
+    <!--footer-->
+    <footer th:insert="~{pages/components/footer::footer}">
+    </footer>
+    <!--/footer-->
+</div>
+</body>
+
+</html>
