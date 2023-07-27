@@ -1,8 +1,8 @@
 <div th:fragment="userDefault" class="user-icon">
-  <div class="user-icon-head"></div>
-  <div class="user-icon-body"></div>
+    <div class="user-icon-head"></div>
+    <div class="user-icon-body"></div>
 </div>
 
-<div th:fragment="userAvatar" class="user-icon">
-  <img th:src="@{'data:image/jpeg;base64,' + ${utilizer.getBase64Avatar()}}">
+<div th:fragment="userAvatar" class="user-icon-avatar">
+    <img th:src="@{'data:image/jpeg;base64,' + ${utilizer.getBase64Avatar()}}">
 </div>

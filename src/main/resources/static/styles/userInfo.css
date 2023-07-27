@@ -247,9 +247,17 @@ main {
     justify-content: space-between;
 }
 
-.plants-photo img{
+.plants-photo{
     width: 110px;
+    height: 110px;
+}
+
+.plants-photo img{
+    height:100%;
+    width:100%;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .plants-info {
@@ -321,46 +329,51 @@ main {
     align-items: stretch;
 }
 
-.user-icon{
+.user-icon-avatar{
     align-self: center;
+    width: 110px;
+    height: 110px;
 }
 
-.user-icon img{
+.user-icon-avatar img{
+    height:100%;
+    width:100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.user-icon {
+    align-self: center;
+    background: rgb(53 159 198);
+    border-radius: 50%;
+    border:solid 1px rgb(53 159 198);
     width: 110px;
+    height: 110px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.user-icon-head {
+    background: white;
+    position: absolute;
+    top: 20%;
+    left: calc(50% - 18%);
+    width: 36%;
+    height: 36%;
     border-radius: 50%;
 }
 
-/*.user-icon {*/
-/*    align-self: center;*/
-/*    background: rgb(53 159 198);*/
-/*    border-radius: 50%;*/
-/*    border:solid 1px rgb(53 159 198);*/
-/*    width: 110px;*/
-/*    height: 110px;*/
-/*    position: relative;*/
-/*    overflow: hidden;*/
-/*    margin-bottom: 25px;*/
-/*}*/
-
-/*.user-icon-head {*/
-/*    background: white;*/
-/*    position: absolute;*/
-/*    top: 20%;*/
-/*    left: calc(50% - 18%);*/
-/*    width: 36%;*/
-/*    height: 36%;*/
-/*    border-radius: 50%;*/
-/*}*/
-
-/*.user-icon-body {*/
-/*    background: white;*/
-/*    position: absolute;*/
-/*    bottom: -40%;*/
-/*    left: calc(50% - 40%);*/
-/*    width: 80%;*/
-/*    height: 80%;*/
-/*    border-radius: 45%;*/
-/*}*/
+.user-icon-body {
+    background: white;
+    position: absolute;
+    bottom: -40%;
+    left: calc(50% - 40%);
+    width: 80%;
+    height: 80%;
+    border-radius: 45%;
+}
 
 .user-info {
 }

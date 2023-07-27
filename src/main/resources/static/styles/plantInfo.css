@@ -233,13 +233,17 @@ main {
 }
 
 .plant-photo img {
-    width: 150px;
+    height:100%;
+    width:100%;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .plant-photo {
     align-self: center;
-    margin: 25px;
+    width: 150px;
+    height: 150px;
 }
 
 .plant-info-body {

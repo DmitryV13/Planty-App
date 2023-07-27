@@ -24,24 +24,20 @@
             <div class="main__container">
                 <div class="list-title">All current users</div>
                 <div class="users-list">
-                    <div th:each="user : ${users}" class="user-item">
-                        <div class="user-icon">
-                            <img th:src="@{'data:image/jpeg;base64,' + ${user.getBase64Avatar()}}">
-<!--                            <div class="user-icon-head"></div>-->
-<!--                            <div class="user-icon-body"></div>-->
-                        </div>
+                    <div th:each="utilizer : ${users}" class="user-item">
+                        <div th:replace="${utilizer.getBase64Avatar()==null} ? ~{pages/components/icons::userDefault} : ~{pages/components/icons::userAvatar}"></div>
                         <div class="user-info">
                             <div class="info-item">
                                 <div class="item-property">user:</div>
-                                <div th:text="${user.getName() + ' ' + user.getSurname()}" class="item-value"></div>
+                                <div th:text="${utilizer.getName() + ' ' + utilizer.getSurname()}" class="item-value"></div>
                             </div>
                             <div class="info-item">
                                 <div class="item-property">login:</div>
-                                <div th:text="${user.getLogin()}" class="item-value"></div>
+                                <div th:text="${utilizer.getLogin()}" class="item-value"></div>
                             </div>
                         </div>
                         <div class="inspect-link">
-                            <a th:href="@{/userInfo/{userId}(userId=${user.getId()})}" class="inspect">Inspect</a>
+                            <a th:href="@{/userInfo/{userId}(userId=${utilizer.getId()})}" class="inspect">Inspect</a>
                         </div>
                     </div>
                 </div>

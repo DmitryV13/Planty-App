@@ -21,14 +21,10 @@
     <!--main-->
     <main class="main">
         <div class="container">
-            <div th:object="${user}" class="main__container">
+            <div th:object="${utilizer}" class="main__container">
                 <div class="list-title">User</div>
                 <div class="user-info-body">
-                    <div class="user-icon">
-                        <img th:src="@{'data:image/jpeg;base64,' + ${user.getBase64Avatar()}}">
-<!--                        <div class="user-icon-head"></div>-->
-<!--                        <div class="user-icon-body"></div>-->
-                    </div>
+                    <div th:replace="${utilizer.getBase64Avatar()==null} ? ~{pages/components/icons::userDefault} : ~{pages/components/icons::userAvatar}"></div>
                     <div class="user-info">
                         <div class="info-item">
                             <div class="item-property">name:</div>

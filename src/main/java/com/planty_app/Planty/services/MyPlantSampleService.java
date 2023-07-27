@@ -83,7 +83,7 @@ public class MyPlantSampleService {
     }
     
     @Synchronized
-    @Scheduled(initialDelay = 2000, fixedDelay = 3000)
+    @Scheduled(cron = "@daily")
     public void refreshDaysBeforeNextWateringForAllPlantSamples(){
         List<MyPlantSample> plants=myPlantSampleRepository.findAll();
         if(plants.isEmpty())
