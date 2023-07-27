@@ -104,7 +104,7 @@ public class UtilizerController {
         Utilizer chosenUser = utilizerService.findUtilizerById(userId);
         HttpSession session = request.getSession();
         session.setAttribute("chosenUser", chosenUser);
-        model.addAttribute("user", chosenUser);
+        model.addAttribute("utilizer", chosenUser);
         return "pages/userInfo";
     }
     

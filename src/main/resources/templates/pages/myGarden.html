@@ -133,8 +133,8 @@
                             <!--item for js-->
                             <div th:each="plantSample : ${plantSamples}" class="">
                                 <a th:href="@{'properties' + ${plantSample.getId()}}" class="plants-item popup-link">
-                                    <div class="plants-item-photo"><img
-                                            th:src="@{'data:image/jpeg;base64,' + ${plantSample.getPlant().getBase64Photo()}}">
+                                    <div class="plants-item-photo">
+                                        <img th:src="@{'data:image/jpeg;base64,' + ${plantSample.getPlant().getBase64Photo()}}">
                                     </div>
                                     <div class="plants-item-text">
                                         <div class="plants-item-property">
